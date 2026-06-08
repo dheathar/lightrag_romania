@@ -1,0 +1,153 @@
+{
+  "dataset_info": {
+    "name": "Evaluarea Intermediară PODCA 2007-2009",
+    "description": "Tests RAG quality on the Intermediate Evaluation of the Operational Programme for Administrative Capacity Development (PODCA) for the period January 2007 - June 2010. This 12-page Romanian-language summary covers relevance, coherence, effectiveness, efficiency, and strategic contribution of PODCA, with key recommendations.",
+    "source_document": "Evaluarea Intermediară a Programului Operaţional Dezvoltarea Capacităţii Administrative pentru perioada 1 ianuarie 2007 - 30 iunie 2009.pdf",
+    "language": "Romanian",
+    "pipeline": "docling_vision + TOKEN_SIZE",
+    "evaluator": "East West Consulting România, NTSN CONECT, East West Consulting Belgia",
+    "fund": "European Social Fund (FSE)"
+  },
+  "test_cases": [
+    {
+      "question": "Cine a realizat evaluarea intermediară a PODCA și în ce perioadă?",
+      "ground_truth": "Autoritatea de Management pentru Programul Operațional Dezvoltarea Capacității Administrative (AMPODCA) din România a contractat consorțiul format din East West Consulting România, NTSN CONECT și East West Consulting Belgia pentru realizarea evaluării intermediare a PODCA pentru perioada 1 ianuarie 2007 - 30 iunie 2010. Evaluarea intermediară a demarat în iulie 2010, iar prima variantă a raportului a fost redactată în septembrie 2010.",
+      "question_type": "factual",
+      "difficulty": "easy",
+      "source_pages": [1]
+    },
+    {
+      "question": "Câte proiecte erau în implementare sau finalizate în cadrul PODCA la momentul evaluării și care este concluzia despre relevanța lor?",
+      "ground_truth": "La momentul evaluării existau 187 de proiecte aflate în implementare sau finalizate. Acestea sunt relevante pentru domeniile majore de intervenție în cadrul cărora au fost contractate. Concluzia evaluatorilor este că intervențiile PODCA până la data de 30 iunie 2010 sunt relevante, dar insuficiente pentru a răspunde nevoilor identificate. Proiectele au valori relativ reduse, iar doar câteva proiecte cu valoare mare au fost contractate în cadrul DMI 1.1 (bună reglementare), DMI 1.2 (monitorizare și evaluare) și DMI 2.1 (sprijin pentru descentralizare).",
+      "question_type": "factual",
+      "difficulty": "medium",
+      "source_pages": [1, 2]
+    },
+    {
+      "question": "Care sunt cele trei grupuri de beneficiari ai PODCA și cum este distribuită finanțarea între ele?",
+      "ground_truth": "Beneficiarii PODCA pot fi clasificați în trei grupuri: administrația centrală, administrația locală și sectorul non-guvernamental. Toate cele trei grupuri sunt relevante pentru obiectivele PODCA. Din portofoliul celor 187 de proiecte, aproximativ două treimi din valoarea alocărilor FSE contractate revin proiectelor din administrația centrală. Participarea ONG-urilor este redusă, deși acestea ar putea fi folosite pentru a direcționa mai multă asistență PODCA la nivelul comunelor. AM PODCA își propune să crească participarea ONG-urilor.",
+      "question_type": "factual",
+      "difficulty": "medium",
+      "source_pages": [2]
+    },
+    {
+      "question": "Cum a afectat criza economică contextul programului PODCA?",
+      "ground_truth": "Efectele crizei economice au schimbat în mod fundamental contextul programului PODCA. Până la sfârșitul anului 2009, indicatorii de context prezentau o imagine stabilă, evidențiind că nevoile identificate în 2006 rămăseseră valabile. Însă criza a impus un accent foarte mare pe reducerea cheltuielilor publice și pe sprijinirea mediului de afaceri. Criza economică aduce o nevoie prioritară suplimentară în special în sectorul de sănătate și asistență socială. Prioritățile reformei administrației publice sunt în schimbare, ceea ce impune adoptarea pentru următoarea perioadă de programare a unui nou set de indicatori de context, cu o bază economică mai puternică.",
+      "question_type": "analytical",
+      "difficulty": "medium",
+      "source_pages": [2, 3]
+    },
+    {
+      "question": "Ce schimbări fundamentale au apărut în reforma administrației publice începând cu septembrie 2009?",
+      "ground_truth": "Începând cu septembrie 2009 au apărut schimbări fundamentale în ceea ce privește prioritățile reformei administrației publice, modificări apărute ca urmare a efectelor crizei financiare asupra cheltuielilor publice. Noile elemente ale reformei sunt menționate în Legea 329/2009, dar nu sunt transpuse într-un document coerent de programare. Există două obiective majore, ambele relevante pentru PODCA: reducerea semnificativă a cheltuielilor publice și susținerea mediului de afaceri. PODCA a demonstrat că este suficient de flexibil pentru a susține acțiunile privind reducerea cheltuielilor, conform analizelor Băncii Mondiale.",
+      "question_type": "factual",
+      "difficulty": "medium",
+      "source_pages": [3]
+    },
+    {
+      "question": "Care este concluzia evaluării privind îndeplinirea obiectivelor PODCA la 30 iunie 2010?",
+      "ground_truth": "Având în vedere țintele indicatorilor pentru 2010, țintele generale pentru 2015 și absorbția FSE, concluzia este că obiectivele PODCA nu erau atinse la data de 30 iunie 2010. Schemele de formare din cadrul DMI 1.3 și proiectele pentru simplificare administrativă din cadrul DMI 2.2 au cea mai relevantă contribuție la atingerea obiectivelor. Există unele exemple individuale de proiecte excelente, dar acestea nu sunt suficiente pentru a genera impactul scontat. În majoritatea cazurilor, indicatorii de rezultat ai programului operațional nu se regăsesc în proiectele contractate, ceea ce face necesară o reevaluare a indicatorilor.",
+      "question_type": "analytical",
+      "difficulty": "medium",
+      "source_pages": [4]
+    },
+    {
+      "question": "Ce problemă majoră a fost identificată în legătură cu rata de respingere a cererilor de finanțare?",
+      "ground_truth": "Rata de respingere a cererilor de finanțare pentru Axa Prioritară 1 și Axa Prioritară 2 este ridicată. Evaluatorii concluzionează că există o lipsă de capacitate a organizațiilor beneficiare pentru pregătirea unor cereri mai bune. Volumul și ritmul procesării cererilor de finanțare au fost ineficiente. Factorii care au contribuit la această ineficiență includ: ritmul inegal al depunerii cererilor, întârzierile în contractarea serviciilor de evaluare, și implicarea mai multor direcții din Ministerul Administrației și Internelor (juridic, achiziții publice, financiar), precum și schimbările din legislația privind achizițiile publice.",
+      "question_type": "analytical",
+      "difficulty": "medium",
+      "source_pages": [5]
+    },
+    {
+      "question": "Care este riscul financiar principal identificat pentru PODCA și de ce?",
+      "ground_truth": "Nivelul de rambursare este foarte scăzut. Evaluatorii consideră că există un risc ridicat de dezangajare de fonduri în anul 2013, cu posibilitatea declanșării începând din 2012. Aceasta se datorează nivelului redus de contractare și absorbție a fondurilor PODCA.",
+      "question_type": "factual",
+      "difficulty": "easy",
+      "source_pages": [5]
+    },
+    {
+      "question": "Care este diferența semnificativă între distribuția geografică a proiectelor PODCA?",
+      "ground_truth": "Există o diferență semnificativă între valoarea proiectelor contractate în regiunile 1-7 (29%) și proiectele din regiunea 8 (71%), regiune care include administrația centrală. Aceasta reflectă faptul că majoritatea fondurilor au fost direcționate către administrația centrală, în detrimentul administrației locale și regionale.",
+      "question_type": "factual",
+      "difficulty": "medium",
+      "source_pages": [1]
+    },
+    {
+      "question": "Ce recomandare face evaluarea privind participarea ONG-urilor în PODCA?",
+      "ground_truth": "Recomandarea 1 solicită promovarea unui dialog mai deschis cu ONG-uri relevante, pentru a le informa despre modul în care pot participa la implementarea PODCA și pentru a identifica modalitățile optime de contribuție a acestora la obiectivele PODCA, ceea ce ar putea rezulta în cereri de proiecte destinate ONG-urilor. Efectul așteptat: participarea crescută a ONG-urilor conduce la o mai bună rată de absorbție a PODCA la nivelul administrației locale.",
+      "question_type": "factual",
+      "difficulty": "easy",
+      "source_pages": [8]
+    },
+    {
+      "question": "Ce rol are Legea 329/2009 în contextul PODCA?",
+      "ground_truth": "Legea 329/2009 conține noile elemente ale reformei administrației publice apărute ca urmare a crizei financiare, dar acestea nu sunt transpuse într-un document coerent de programare. Angajamentele din Legea 329/2009, împreună cu cele din Acordul de Finanțare cu FMI și Programul de Convergență 2009-2012, nu au fost transpuse într-o strategie care să poată fi susținută prin PODCA. Evaluatorii recomandă ca Guvernul să elaboreze o strategie unică și coerentă pentru convertirea acestor angajamente într-o serie de proiecte și indicatori de performanță măsurabili.",
+      "question_type": "analytical",
+      "difficulty": "hard",
+      "source_pages": [3, 8, 9]
+    },
+    {
+      "question": "Ce probleme au fost identificate cu sistemul SMIS în cadrul PODCA?",
+      "ground_truth": "Sistemul SMIS nu servește în mod corespunzător procesul de raportare, ceea ce conduce la producerea ad hoc a rapoartelor de management necesare, utilizând alte surse. Există o dependență de baze de date de tip Access și de tabele Excel în pregătirea de informări și raportări. Chiar dacă informațiile furnizate la termenul de 30 iunie 2010 s-au dovedit suficient de exacte, există riscul ca menținerea acurateței datelor să se deterioreze pe măsură ce volumul de informații stocate crește. Există de asemenea o dependență prea mare în procesul de raportare față de angajații care mențin baza de date.",
+      "question_type": "factual",
+      "difficulty": "medium",
+      "source_pages": [5]
+    },
+    {
+      "question": "Ce recomandare face evaluarea privind realocarea fondurilor între DMI-uri?",
+      "ground_truth": "Recomandarea 6 solicită următoarele realocări propuse Comitetului de Monitorizare al PODCA: (a) realocarea de fonduri de la DMI 1.2 la DMI 1.3 pentru a susține o cerere de proiecte care să răspundă necesității de reducere a cheltuielilor publice prin restructurare; (b) realocarea de fonduri de la DMI 2.1 la DMI 2.2 pentru a susține o cerere de proiecte care să vizeze reducerea cheltuielilor publice printr-o eficientizare a utilizării acestora. Efectul așteptat: absorbția fondurilor PODCA îmbunătățită.",
+      "question_type": "factual",
+      "difficulty": "hard",
+      "source_pages": [10]
+    },
+    {
+      "question": "Ce bune practici au fost identificate de evaluatori dintre proiectele contractate?",
+      "ground_truth": "Evaluatorii au identificat următoarele proiecte drept candidate potențiale pentru bune practici: (1) DMI 1.1 - Proiectul pentru reducerea barierelor administrative, pentru relevanța pentru o prioritate; (2) DMI 1.3 - Programe universitare de master, pentru acoperirea geografică; (3) DMI 1.3 - Proiectul ANFP ECDL pentru 12.000 de funcționari din administrația publică locală, pentru buna organizare și managementul corespunzător al proiectului. De asemenea, utilizarea fișelor de idei de proiecte a fost eficace și a contribuit la dezvoltarea unor propuneri relevante.",
+      "question_type": "factual",
+      "difficulty": "medium",
+      "source_pages": [6]
+    },
+    {
+      "question": "Ce practici din alte state membre ar putea ajuta PODCA să-și îmbunătățească contribuția strategică?",
+      "ground_truth": "Principalele zone în care practicile altor state membre ar putea ajuta AM PODCA includ: (1) Coordonarea cu un program complementar finanțat din FEDR – exemplul Ungariei; (2) Includerea sectorului justiție ca sector prioritar în vederea atingerii obiectivului de susținere mai puternică a mediului de afaceri – cazul Poloniei, Sloveniei; (3) Sprijin pentru o mai bună utilizare a tehnologiei informației în furnizarea serviciilor publice (servicii de tip e-Guvernare); (4) Contribuția parteneriatelor și a sectorului ONG – exemplul Țării Galilor.",
+      "question_type": "factual",
+      "difficulty": "medium",
+      "source_pages": [6]
+    },
+    {
+      "question": "Care este situația privind capacitatea beneficiarilor cheie de a dezvolta proiecte PODCA?",
+      "ground_truth": "Deficitul de resurse umane al instituțiilor responsabile cu reforma administrației publice (RAP), în calitatea lor de principali beneficiari din PODCA (SGG, cele trei ministere prioritare), împiedică dezvoltarea de proiecte. Actualii responsabili ai RAP, în particular Secretariatul General al Guvernului (SGG), nu au capacitatea de a dezvolta și gestiona portofoliul de proiecte preconizat inițial pentru DMI 1.1. Nu există o estimare a valorii potențialelor proiecte urgente care pot fi elaborate. Evaluarea recomandă că factorii de decizie din instituțiile beneficiarilor ar trebui să aloce resursele necesare pentru accelerarea dezvoltării de cereri de finanțare.",
+      "question_type": "analytical",
+      "difficulty": "hard",
+      "source_pages": [3, 4]
+    },
+    {
+      "question": "Ce recomandări face evaluarea pentru următoarea perioadă de programare privind indicatorii?",
+      "ground_truth": "Evaluarea face două recomandări cheie: Recomandarea 11 - Analiza indicatorilor de context pentru următoarea perioadă de programare ar trebui să aibă în vedere serviciile publice și barierele administrative pentru mediul de afaceri; Recomandarea 12 - Analiza indicatorilor de context pentru următoarea perioadă de programare ar trebui să se alinieze noilor ținte ale indicatorilor stabilite pentru UE2020.",
+      "question_type": "factual",
+      "difficulty": "medium",
+      "source_pages": [12]
+    },
+    {
+      "question": "Care sunt cele 6 întrebări de evaluare și cum sunt structurate în raport?",
+      "ground_truth": "Caietul de Sarcini pentru evaluarea intermediară conține șase întrebări de evaluare, împărțite în 17 domenii de analiză. Raportul de evaluare alocă un capitol separat pentru fiecare întrebare: Capitolul 1 - Relevanța (relevanța intervențiilor, beneficiarilor, indicatorilor de context); Capitolul 2 - Coerența (compatibilitatea strategiei cu strategiile naționale, sistemul de intervenție); Capitolul 3 - Eficacitatea (gradul de îndeplinire a obiectivelor, eficacitatea informării și publicității); Capitolul 4 - Eficiența (eficiența sistemului de management, cheltuirea fondurilor conform planului); Capitolul 5 - Contribuția la obiectivele strategice (rezultate, oportunități, planuri viitoare).",
+      "question_type": "factual",
+      "difficulty": "hard",
+      "source_pages": [1, 2, 3, 4, 5]
+    },
+    {
+      "question": "Ce recomandare face evaluarea privind accelerarea procesului de evaluare a proiectelor?",
+      "ground_truth": "Recomandarea 9 solicită identificarea unei soluții pentru accelerarea procesului de evaluare, selecție și contractare pentru a putea finaliza evaluarea celor 458 proiecte aflate în proces de evaluare. Aceasta poate include asistență tehnică, instruire, coordonare permanentă cu direcțiile de achiziții, juridic și financiar din MAI. Recomandarea 10 adaugă că asistența tehnică necesară pentru externalizarea evaluării cererilor de finanțare ar trebui să fie realizată printr-un contract cadru, asigurându-se că există resursele necesare atunci când este nevoie.",
+      "question_type": "factual",
+      "difficulty": "medium",
+      "source_pages": [11]
+    },
+    {
+      "question": "Cum a fost evaluată eficacitatea activităților de informare și publicitate ale PODCA?",
+      "ground_truth": "Activitățile de informare și publicitate derulate până în prezent au fost eficace comparativ cu resursele disponibile. Proiectul de asistență tehnică în domeniul comunicării aflat în desfășurare contribuie semnificativ la acoperirea decalajelor acumulate. Rezultatele au avut la bază trei factori: (1) bugetul mic disponibil, aproape inexistent, pentru implementarea planului de comunicare până la semnarea contractului de AT; (2) implicarea și eforturile AMPODCA și ale Compartimentului de Comunicare; (3) reacția pozitivă a beneficiarilor, de a include acțiuni de informare și publicitate în proiecte.",
+      "question_type": "factual",
+      "difficulty": "medium",
+      "source_pages": [4]
+    }
+  ]
+}

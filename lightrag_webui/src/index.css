@@ -1,0 +1,260 @@
+@import 'tailwindcss';
+
+@plugin 'tailwindcss-animate';
+@plugin 'tailwind-scrollbar';
+
+@source '../index.html';
+@source './**/*.{ts,tsx}';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   LUMEN — Soft Glass theme for DocForge
+   Evolved-warm coral-terracotta palette + translucent depth.
+   Only the token values changed vs. the original warm theme;
+   the Lumen utility layer at the bottom adds the ambient field
+   and glass surfaces. Dark theme left intact.
+   ============================================================ */
+:root {
+  --background: hsl(30 40% 96.5%);
+  --foreground: hsl(22 18% 17%);
+  --card: hsl(33 50% 99%);
+  --card-foreground: hsl(22 18% 17%);
+  --popover: hsl(33 50% 99.5%);
+  --popover-foreground: hsl(22 18% 17%);
+  --primary: hsl(13 74% 54%);              /* coral terracotta */
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(28 32% 92%);
+  --secondary-foreground: hsl(24 14% 22%);
+  --muted: hsl(28 26% 92.5%);
+  --muted-foreground: hsl(24 10% 44%);
+  --accent: hsl(20 60% 93%);
+  --accent-foreground: hsl(16 40% 28%);
+  --destructive: hsl(0 72% 55%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(28 28% 87%);
+  --input: hsl(28 28% 87%);
+  --ring: hsl(13 74% 54%);
+  --chart-1: hsl(13 72% 56%);
+  --chart-2: hsl(168 52% 42%);
+  --chart-3: hsl(200 35% 32%);
+  --chart-4: hsl(36 70% 58%);
+  --chart-5: hsl(280 45% 58%);
+  --radius: 0.85rem;
+  --sidebar-background: hsl(28 32% 95%);
+  --sidebar-foreground: hsl(24 12% 25%);
+  --sidebar-primary: hsl(13 74% 54%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(28 30% 91%);
+  --sidebar-accent-foreground: hsl(24 12% 18%);
+  --sidebar-border: hsl(28 28% 87%);
+  --sidebar-ring: hsl(13 74% 54%);
+
+  /* Lumen accent gradient (used by .lumen-grad / user bubbles / send) */
+  --lumen-grad: linear-gradient(135deg, hsl(18 80% 61%), hsl(13 73% 51%));
+}
+
+.dark {
+  --background: hsl(240 10% 3.9%);
+  --foreground: hsl(0 0% 98%);
+  --card: hsl(240 10% 3.9%);
+  --card-foreground: hsl(0 0% 98%);
+  --popover: hsl(240 10% 3.9%);
+  --popover-foreground: hsl(0 0% 98%);
+  --primary: hsl(13 74% 56%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(240 3.7% 15.9%);
+  --secondary-foreground: hsl(0 0% 98%);
+  --muted: hsl(240 3.7% 15.9%);
+  --muted-foreground: hsl(240 5% 64.9%);
+  --accent: hsl(240 3.7% 15.9%);
+  --accent-foreground: hsl(0 0% 98%);
+  --destructive: hsl(0 62.8% 30.6%);
+  --destructive-foreground: hsl(0 0% 98%);
+  --border: hsl(240 3.7% 15.9%);
+  --input: hsl(240 3.7% 15.9%);
+  --ring: hsl(13 74% 56%);
+  --chart-1: hsl(220 70% 50%);
+  --chart-2: hsl(160 60% 45%);
+  --chart-3: hsl(30 80% 55%);
+  --chart-4: hsl(280 65% 60%);
+  --chart-5: hsl(340 75% 55%);
+  --sidebar-background: hsl(240 5.9% 10%);
+  --sidebar-foreground: hsl(240 4.8% 95.9%);
+  --sidebar-primary: hsl(13 74% 56%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(240 3.7% 15.9%);
+  --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
+  --sidebar-border: hsl(240 3.7% 15.9%);
+  --sidebar-ring: hsl(13 74% 56%);
+  --lumen-grad: linear-gradient(135deg, hsl(18 70% 54%), hsl(13 66% 46%));
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar-background);
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ============================================================
+   LUMEN utility layer
+   Use these classes in the restyled retrieval surfaces.
+   !important on the glass background/border/shadow lets the
+   class win over bg-card / bg-muted / border without editing
+   the shared Card/Button primitives.
+   ============================================================ */
+
+/* Ambient warm gradient field — wrap a full-height screen with this */
+.lumen-field {
+  position: relative;
+  isolation: isolate;
+  background: var(--background);
+}
+.lumen-field::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(560px 560px at 6% -8%, hsl(20 85% 70% / 0.5), transparent 60%),
+    radial-gradient(540px 540px at 104% 40%, hsl(13 80% 62% / 0.34), transparent 62%),
+    radial-gradient(520px 520px at 34% 118%, hsl(33 80% 72% / 0.46), transparent 60%);
+  filter: saturate(1.05);
+}
+.dark .lumen-field::before { opacity: 0.4; }
+
+/* Frosted glass surface */
+.lumen-glass {
+  background: hsl(33 52% 99% / 0.68) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(1.25);
+  backdrop-filter: blur(22px) saturate(1.25);
+  border: 1px solid hsl(0 0% 100% / 0.7) !important;
+  box-shadow: 0 18px 50px -22px hsl(20 60% 28% / 0.35), inset 0 1px 0 hsl(0 0% 100% / 0.6) !important;
+}
+.dark .lumen-glass {
+  background: hsl(24 14% 12% / 0.6) !important;
+  border-color: hsl(0 0% 100% / 0.08) !important;
+  box-shadow: 0 18px 50px -22px #000a, inset 0 1px 0 hsl(0 0% 100% / 0.06) !important;
+}
+
+/* Lighter frosted surface for nested cards (entity/relationship rows) */
+.lumen-glass-soft {
+  background: hsl(0 0% 100% / 0.55) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(14px) saturate(1.2);
+  border: 1px solid hsl(0 0% 100% / 0.6) !important;
+}
+.dark .lumen-glass-soft {
+  background: hsl(0 0% 100% / 0.05) !important;
+  border-color: hsl(0 0% 100% / 0.08) !important;
+}
+
+/* Coral gradient fill (send button, badges) */
+.lumen-grad {
+  background-image: var(--lumen-grad) !important;
+  color: #fff !important;
+  border: 0 !important;
+}
+.lumen-grad:hover { filter: brightness(1.04); }
+
+/* User chat bubble — gradient with asymmetric radius */
+.lumen-user-bubble {
+  background-image: var(--lumen-grad) !important;
+  color: #fff !important;
+  border-radius: 20px 20px 6px 20px !important;
+  box-shadow: 0 10px 24px -10px hsl(13 73% 51% / 0.6);
+}
+
+/* Assistant answer card radius */
+.lumen-answer { border-radius: 20px !important; }
+
+/* Reasoning highlight card */
+.lumen-reason {
+  background-image: linear-gradient(135deg, hsl(13 74% 54% / 0.1), hsl(0 0% 100% / 0.45)) !important;
+  border: 1px solid hsl(13 74% 54% / 0.22) !important;
+}
+.dark .lumen-reason {
+  background-image: linear-gradient(135deg, hsl(13 74% 54% / 0.16), hsl(0 0% 100% / 0.04)) !important;
+}
+
+/* ---------- existing app styles (unchanged) ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: hsl(28 18% 78%);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.dark ::-webkit-scrollbar-thumb { background-color: hsl(0 0% 35%); }
+.dark ::-webkit-scrollbar-track { background-color: transparent; }
+
+/* KaTeX Math Formula Styles */
+.katex-display-wrapper { text-align: center; position: relative; }
+.katex-display-wrapper .katex-display { margin: 0.5em 0; text-align: center; }
+.katex-inline-wrapper .katex { font-size: inherit; line-height: inherit; }
+.katex .base { color: inherit; }
+.katex .mord, .katex .mop, .katex .mbin, .katex .mrel,
+.katex .mpunct, .katex .mopen, .katex .mclose, .katex .minner { color: inherit; }
+.katex-display { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+.katex-display > .katex { white-space: nowrap; }
+.katex .katex-error {
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  border-radius: 4px;
+  padding: 2px 4px;
+  color: #dc2626;
+}
+.dark .katex .katex-error {
+  background-color: rgba(255, 0, 0, 0.2);
+  border-color: rgba(255, 0, 0, 0.4);
+  color: #ef4444;
+}

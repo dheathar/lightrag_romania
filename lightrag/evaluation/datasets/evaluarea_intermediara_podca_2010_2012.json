@@ -1,0 +1,155 @@
+{
+  "dataset_info": {
+    "name": "Evaluarea Intermediară PODCA 2010-2012",
+    "description": "Tests RAG quality on the Intermediate Evaluation of the Operational Programme for Administrative Capacity Development (PODCA) for the period 2010-2012. This 11-page Romanian-language final evaluation report summary was prepared by Ernst & Young, covering relevance, effectiveness, efficiency, indicator analysis, and 17 key recommendations.",
+    "source_document": "Evaluarea intermediară a Programului Operațional Dezvolatrea Capacității Administrative pentru perioada 2010-2012.pdf",
+    "language": "Romanian",
+    "pipeline": "docling_vision + SEMANTIC",
+    "evaluator": "Ernst & Young SRL",
+    "fund": "European Social Fund (FSE)",
+    "managing_authority": "Ministerul Dezvoltării Regionale și Administrației Publice",
+    "project_code": "SMIS 40101"
+  },
+  "test_cases": [
+    {
+      "question": "Cine a realizat evaluarea intermediară PODCA 2010-2012 și în ce context?",
+      "ground_truth": "Evaluarea intermediară a PO DCA pentru perioada 2010-2012 a fost realizată de o echipă de experți Ernst & Young SRL, sub coordonarea Autorității de Management a PO DCA, din cadrul Ministerului Dezvoltării Regionale și Administrației Publice. Evaluarea a fost lansată la 18 septembrie 2012 și realizată în șase luni. Este parte a proiectului 'Sprijin pentru funcționarea AM PO DCA și pentru pregătirea următorului exercițiu de programare', cod SMIS 40101, cofinanțat din Fondul Social European prin PODCA 2007-2013.",
+      "question_type": "factual",
+      "difficulty": "easy",
+      "source_pages": [1, 2]
+    },
+    {
+      "question": "Câte întrebări de evaluare au fost utilizate și cum au fost organizate?",
+      "ground_truth": "Evaluarea s-a axat pe 13 întrebări de evaluare, grupate în 7 activități și 4 teme: I. RELEVANȚĂ (Activitatea 1: analiza relevanței operațiunilor - 2 întrebări); II. EFICACITATE (Activitatea 2: analiza aranjamentelor de implementare, Activitatea 3: analiza selecției de proiecte, Activitatea 4: analiza eficacității intervențiilor - 5 întrebări); III. EFICIENȚĂ (Activitatea 5: analiza eficienței intervențiilor, Activitatea 6: analiza progresului prin indicatori financiari - 2 întrebări); IV. ANALIZA INDICATORILOR (Activitatea 7: analiza indicatorilor din proiectele contractate - 2 întrebări).",
+      "question_type": "factual",
+      "difficulty": "hard",
+      "source_pages": [2, 3]
+    },
+    {
+      "question": "Ce instrumente metodologice au fost utilizate în cadrul evaluării PODCA 2010-2012?",
+      "ground_truth": "Cinci instrumente metodologice au fost utilizate în cadrul evaluării: cercetare de birou, analiza datelor, interviuri, sondaje electronice (unul în rândul beneficiarilor PO DCA și unul în rândul solicitanților respinși) și un focus grup, la care au participat beneficiarii strategici ai PO DCA. Evaluarea a fost organizată în 4 etape: perioada inițială, colectarea datelor, analiza datelor și raportare.",
+      "question_type": "factual",
+      "difficulty": "medium",
+      "source_pages": [3]
+    },
+    {
+      "question": "Care sunt cele cinci categorii de beneficiari eligibili ai PO DCA și cum este distribuția bugetară?",
+      "ground_truth": "Cele cinci categorii de beneficiari eligibili ai PO DCA continuă să fie relevante pentru logica de intervenție a programului (CG2). Ponderea ridicată a autorităților din administrația publică centrală în bugetul PO DCA reflectă orientarea logicii programului către intervenții strategice, cu efecte asupra performanței întregii administrații, orientare care a asigurat eficiența dar și eficacitatea programului. Grupurile țintă ale PO DCA sunt, în general, relevante pentru logica de intervenție, dar lipsa particularizării analizei de fundamentare a determinat definirea acestora de o manieră generică.",
+      "question_type": "factual",
+      "difficulty": "medium",
+      "source_pages": [4]
+    },
+    {
+      "question": "Care este concluzia generală privind atingerea obiectivelor PODCA la finalul lunii octombrie 2012?",
+      "ground_truth": "La finalul lunii octombrie 2012, PO DCA își atinsese parțial obiectivele (CG8). Până la finalul programului se vor înregistra progrese notabile, cu toate că nici în acest moment unele obiective nu vor fi în totalitate atinse. Este vorba de obiectivele operaționale ale DMI 2.2, DMI 1.2 și DMI 1.3 (indicatorii rapoarte de monitorizare/evaluare, participanți la instruire certificați, revizuiri structurale, ghiduri de îmbunătățire a colectării veniturilor și analize de simplificare administrativă). Între 2010 și 2012, PO DCA a reușit să recupereze startul în ceea ce privește descentralizarea și contribuie la acest proces în cele trei sectoare prioritare.",
+      "question_type": "analytical",
+      "difficulty": "medium",
+      "source_pages": [6]
+    },
+    {
+      "question": "Ce problemă sistemică majoră a afectat eficiența PO DCA până la finalul anului 2012?",
+      "ground_truth": "O problemă sistemică cu un efect negativ semnificativ asupra eficienței scăzute a PO DCA este legislația complexă în domeniul achizițiilor publice și interpretarea diferită a acesteia de instituțiile implicate în avizarea și controlul procedurilor (Autoritatea de Audit, diferite departamente din cadrul AM PO DCA sau chiar ofițeri de proiect și de verificare diferiți din cadrul AM PO DCA și ANRMAP). Aceste efecte au fost amplificate de expertiza limitată în domeniul achizițiilor publice atât la nivelul autorității de management cât și al beneficiarilor (CG12).",
+      "question_type": "analytical",
+      "difficulty": "medium",
+      "source_pages": [7]
+    },
+    {
+      "question": "Ce efect a avut fluctuația de personal asupra AM PO DCA?",
+      "ground_truth": "Un alt factor care a avut un efect negativ important asupra eficienței programului este capacitatea scăzută a AM PO DCA, atât din punct de vedere al numărului cât și din punct de vedere al experienței și expertizei (CG13). Fluxul semnificativ de personal a împiedicat dezvoltarea echipei PO DCA de o manieră adecvată și a determinat sincope în comunicarea cu beneficiarii și în gestionarea adecvată a implementării proiectelor de la nivel de program. Recomandarea R14.7 stipulează că este esențial să se stopeze fluctuația de personal al autorității de management.",
+      "question_type": "analytical",
+      "difficulty": "medium",
+      "source_pages": [7, 11]
+    },
+    {
+      "question": "Ce problemă a fost identificată privind sistemul informatic pentru beneficiarii programului?",
+      "ground_truth": "Lipsa unui sistem informatic care să permită beneficiarilor programului să transmită în format electronic cererile de rambursare și documentele suport, inclusiv rapoartele de monitorizare, afectează eficiența programului (CG14). Recomandarea R14.6 solicită ca beneficiarii programului să aibă posibilitatea să transmită AM PO DCA cererile de rambursare și documentele suport în format electronic, pe lângă dosarul care conține documentația în versiunea originală.",
+      "question_type": "factual",
+      "difficulty": "easy",
+      "source_pages": [7, 11]
+    },
+    {
+      "question": "Cum evaluează raportul eficiența costurilor programului PO DCA?",
+      "ground_truth": "Programul este în cea mai mare parte foarte eficient din punct de vedere al costurilor (CG15), având în vedere că acesta, cu aceeași investiție, a produs mult mai multe realizări imediate decât a fost preconizat inițial. La nivel de domeniu major de intervenție și axă prioritară, dacă se iau în calcul și realocările operate în special în cadrul AP 2, DMI 2.2 pare cel mai puțin performant din punct de vedere al raportului investiție/realizări imediate, urmat de DMI 2.1.",
+      "question_type": "analytical",
+      "difficulty": "medium",
+      "source_pages": [7]
+    },
+    {
+      "question": "Ce recomandare face evaluarea privind viitoarele intervenții de consolidare a capacității instituționale?",
+      "ground_truth": "Viitoarele intervenții de consolidare a capacității instituționale ar trebui implementate prin proiecte strategice și integrate (R1). Aceste proiecte ar trebui să acopere un întreg sistem care livrează un serviciu public (cu toate palierele sale) sau o problemă orizontală (de exemplu nevoi generale ale 'funcției publice') și ar trebui să integreze și măsuri/activități de monitorizare și evaluare care să asigure și evidențieze eficacitatea acestora. Eficacitatea acestor proiecte înseamnă livrarea de către administrația publică a unor servicii de calitate și eficiente.",
+      "question_type": "factual",
+      "difficulty": "medium",
+      "source_pages": [8]
+    },
+    {
+      "question": "Ce recomandări face evaluarea privind analiza de fundamentare pentru programarea viitoare?",
+      "ground_truth": "Evaluarea face mai multe recomandări: (R1) Nivelul de detaliu al analizei de fundamentare trebuie să permită prioritizarea măsurilor care să asigure eficacitatea maximă a viitoarelor intervenții; (R2) Analiza de fundamentare trebuie să fie suficient de aprofundată și particularizată pentru a permite identificarea adecvată a viitoarelor grupuri țintă și beneficiari eligibili; (R3) Este necesar să se realizeze o analiză aprofundată a efectelor pe care intervențiile programului le-au avut asupra grupurilor țintă.",
+      "question_type": "factual",
+      "difficulty": "hard",
+      "source_pages": [8]
+    },
+    {
+      "question": "Care sunt măsurile recomandate pentru evitarea dezangajării fondurilor (R14)?",
+      "ground_truth": "Recomandarea R14 pentru evitarea dezangajării include: R14.1 - Întărirea capacității AM PO DCA în domeniul achizițiilor publice; R14.2 - Realizarea unei analize continue a riscurilor pentru proiectele aflate în derulare cu privire la prelungirea perioadei de implementare și execuția bugetară; R14.5 - Proiectele nou contractate trebuie selectate pentru a contribui la îndeplinirea obiectivelor programului, în cadrul DMI 2.2, DMI 1.2 și DMI 3.2; R14.6 - Beneficiarii să poată transmită documente în format electronic; R14.7 - Este esențial să se stopeze fluctuația de personal al autorității de management.",
+      "question_type": "factual",
+      "difficulty": "hard",
+      "source_pages": [10, 11]
+    },
+    {
+      "question": "Ce recomandări sunt făcute privind activitățile de comunicare și diseminare?",
+      "ground_truth": "R6 - Comunicarea eficace cu beneficiarii este esențială în vederea evitării dezangajării și a aplicării de corecții la nivel de proiect. Eforturile de comunicare trebuie să continue în 2014 și 2015 și trebuie asigurată achiziționarea de servicii de AT necesare din DMI 3.2. R7 - Unitatea de comunicare trebuie să se concentreze asupra unei serii ample de activități de diseminare a rezultatelor programului, dincolo de cerințele minime ale articolului 7 al Regulamentului CE 1828/2006. Aceste activități ar trebui să maximizeze eficacitatea programului.",
+      "question_type": "factual",
+      "difficulty": "medium",
+      "source_pages": [9]
+    },
+    {
+      "question": "Ce recomandare face evaluarea privind indicatorii de rezultat colectați din surse externe?",
+      "ground_truth": "Recomandarea R11 solicită ca pentru indicatorii de rezultat ai programului pentru care datele trebuie colectate din alte surse decât de la nivel de proiect să se încheie protocoale de colectare anuală a acestor date cu instituțiile furnizoare: (1) cu SGG pentru indicatorii 'Documente de politici publice și proiecte de acte normative nesatisfăcătoare înapoiate inițiatorilor de către SGG' și 'Reducerea costurilor administrative'; (2) cu MFP pentru 'Gradul de colectare a veniturilor proprii ale administrației publice locale'; și cu DGS pentru indicatorul 'Instituții publice care realizează un raport anual de activitate conform Legii nr. 544/2001'.",
+      "question_type": "factual",
+      "difficulty": "hard",
+      "source_pages": [10]
+    },
+    {
+      "question": "Ce concluzii generale au fost formulate privind relevanța programului (CG1-CG3)?",
+      "ground_truth": "CG1: Provocările inerente în ceea ce privește continuarea procesului de descentralizare au fost depășite parțial când s-au dezvoltat și contractat un număr important de proiecte strategice ale administrației publice centrale, prioritare conform programelor naționale guvernamentale. Reforma administrației publice locale este o necesitate incontestabilă, dar proiectele la nivel local pot avea eficiență și eficacitate scăzute fără o reformă globală la nivel central. CG2: Cele cinci categorii de beneficiari continuă să fie relevante, ponderea ridicată a administrației publice centrale reflectând orientarea către intervenții strategice. CG3: Există puține informații specifice privind efectele programului asupra grupurilor țintă.",
+      "question_type": "analytical",
+      "difficulty": "hard",
+      "source_pages": [4]
+    },
+    {
+      "question": "Cum a fost evaluat sistemul de evaluare și selectare a cererilor de finanțare?",
+      "ground_truth": "Sistemul de evaluare și selectare a cererilor de finanțare a fost într-o mare măsură adecvat (CG6). Totuși, patru aspecte necesită îmbunătățire: (1) schimbarea procedurii pentru a evidenția faptul că eliminarea cererilor de finanțare în prima fază nu se datorează aspectelor administrative; (2) detalierea și clarificarea definițiilor. Recomandarea R8 solicită ca în perioada de programare viitoare să se separe etapa de verificare administrativă de cea de verificare a eligibilității.",
+      "question_type": "analytical",
+      "difficulty": "medium",
+      "source_pages": [5, 9]
+    },
+    {
+      "question": "Ce recomandare face evaluarea privind strategia de asistență tehnică pentru viitoarea perioadă?",
+      "ground_truth": "Recomandarea R17 stipulează că strategia de asistență tehnică aferentă viitoarelor intervenții de consolidare a capacității instituționale trebuie pregătită în paralel cu elaborarea programului. Totodată, documentația de atribuire aferentă serviciilor ce trebuie să fie disponibile în anii 2014-2015 (în special de evaluare a cererilor de finanțare) trebuie pregătită în paralel cu strategia de asistență tehnică și trebuie să permită (prin buget, criteriu de atribuire) achiziționarea de servicii calitative. R16 solicită utilizarea bugetului încă disponibil în cadrul axei prioritare asistență tehnică.",
+      "question_type": "factual",
+      "difficulty": "medium",
+      "source_pages": [11]
+    },
+    {
+      "question": "Cum descrie evaluarea procesul iterativ de elaborare a concluziilor și recomandărilor?",
+      "ground_truth": "Procesul de evaluare a fost unul iterativ: constatările și concluziile preliminare ale evaluării, precum și recomandările și Planul de Acțiune aferent au fost discutate cu Autoritatea de Management și principalii actori implicați în implementarea programului. Beneficiarii strategici ai acestuia au luat parte extensiv la procesul de evaluare, prin interviuri, focus grup. Analiza datelor colectate, realizată la termenul limită de 31 octombrie 2012, a rezultat într-o serie de constatări și concluzii intermediare care au generat concluziile generale.",
+      "question_type": "factual",
+      "difficulty": "easy",
+      "source_pages": [3, 11]
+    },
+    {
+      "question": "Care este situația privind monitorizarea și evaluarea eficacității PO DCA?",
+      "ground_truth": "AM PO DCA a utilizat sistemul de indicatori pentru a monitoriza eficacitatea programului și a lua măsuri (CG9). Totuși, sistemul curent nu furnizează date decât pentru indicatorii a căror sursă este reprezentată de proiecte. Evaluarea este primul demers în care se colectează date din surse externe aferente unor indicatori de rezultat. O parte din aceste date nu erau disponibile în perioada evaluării. R12 recomandă derularea în 2014 a unei evaluări dedicate criteriului de eficacitate. R13 recomandă ca pentru viitoarea perioadă de programare să se pună bazele unui sistem adecvat de monitorizare și evaluare.",
+      "question_type": "analytical",
+      "difficulty": "hard",
+      "source_pages": [6, 10]
+    },
+    {
+      "question": "Ce concluzii are evaluarea privind eficacitatea activităților de comunicare și sprijin?",
+      "ground_truth": "Activitățile de comunicare și sprijin aferente potențialilor beneficiari ai cererilor de proiecte au fost doar parțial eficace, având în vedere rata relativ scăzută a cererilor de finanțare aprobate și contractate (CG5). Eficacitatea activităților de comunicare aferente cererilor de idei de proiecte este mai ridicată, în special în cazul cererilor din 2011, dar rata de contractare scăzută a proiectelor din anii anteriori duce la concluzia că gradul de încărcare a personalului AM PO DCA a fost ridicat fără ca investițiile de resurse umane să se concretizeze în proiecte. Două tipuri de activități sunt mai puțin implementate: (1) întâlnirile față în față cu beneficiarii și (2) inițiative de diseminare a informațiilor privind realizările programului.",
+      "question_type": "analytical",
+      "difficulty": "hard",
+      "source_pages": [5]
+    }
+  ]
+}

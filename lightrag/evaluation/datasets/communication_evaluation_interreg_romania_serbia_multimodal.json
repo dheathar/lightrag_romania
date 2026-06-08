@@ -1,0 +1,100 @@
+{
+  "dataset_info": {
+    "name": "Communication Evaluation Report - Interreg-IPA CBC Romania-Serbia (Figures & Tables)",
+    "description": "Tests RAG quality on visual content: figures, charts, tables, and data extracted via Docling + Vision model pipeline. Questions are only answerable if the multimodal preprocessing properly captured visual elements.",
+    "source_document": "Communication Evaluation Report - Interreg-IPA CBC Romania-Serbia Programme Implementation Evaluation.pdf",
+    "language": "English"
+  },
+  "test_cases": [
+    {
+      "question": "According to the survey data figures, what percentage of beneficiaries used the programme website as their main information source?",
+      "ground_truth": "According to Figure 3, 96% of beneficiaries used the programme website as their main source of information about financing opportunities. This was the highest-rated channel for beneficiaries, compared to 83% of applicants who also used the website.",
+      "question_type": "figure",
+      "project": "interreg_multimodal"
+    },
+    {
+      "question": "What was the achievement rate for website page views against the 2019 target according to the communication strategy indicators table?",
+      "ground_truth": "The communication strategy indicators table shows that website page views reached 307,894 total views between 2015-2018, achieving 128.3% of the 2019 target of 240,000 page views. This exceeded the target significantly.",
+      "question_type": "table",
+      "project": "interreg_multimodal"
+    },
+    {
+      "question": "What percentage of beneficiaries rated the programme's promotion materials as very attractive?",
+      "ground_truth": "According to Figure 10, 54% of beneficiaries rated the promotion materials (infographics, flyers, catalogues, agenda) as very attractive. For applicants, the figure was lower at 44% rating them as very attractive.",
+      "question_type": "figure",
+      "project": "interreg_multimodal"
+    },
+    {
+      "question": "Which programme body had the highest satisfaction rating among beneficiaries: the Managing Authority, National Authority, or Joint Secretariat?",
+      "ground_truth": "According to Figure 9, the Joint Secretariat (JS) had the highest satisfaction rating among beneficiaries, with 83% of beneficiaries reporting they were very satisfied with JS responsiveness. This was higher than satisfaction with the Managing Authority (MA) and National Authority (NA) personnel.",
+      "question_type": "figure",
+      "project": "interreg_multimodal"
+    },
+    {
+      "question": "Based on the survey figures, what percentage of applicants had access to information about the eMS Platform from Programme Authorities?",
+      "ground_truth": "According to Figure 11, 67% of applicants confirmed they had access to information or communication from the Programme Authorities related to the use of the eMS Platform. 20% said No, and 13% responded Don't know.",
+      "question_type": "figure",
+      "project": "interreg_multimodal"
+    },
+    {
+      "question": "How did beneficiaries and applicants differ in their preference for receiving information through training sessions according to the communication channel preference figure?",
+      "ground_truth": "According to Figure 4, training sessions were among the most preferred communication channels. Beneficiaries showed approximately 83% preference for training sessions, while applicants also showed high preference around 75%. Both groups ranked training sessions as one of the top preferred channels alongside the website and Facebook.",
+      "question_type": "figure",
+      "project": "interreg_multimodal"
+    },
+    {
+      "question": "What was the total number of event participants recorded between 2015-2018, and how does this compare to the 2019 target?",
+      "ground_truth": "According to the communication strategy indicators table, the total number of event participants between 2015-2018 was 2,940, which represents 367.5% of the 2019 target of 800 participants. This was the highest achievement rate among all communication indicators.",
+      "question_type": "table",
+      "project": "interreg_multimodal"
+    },
+    {
+      "question": "How do beneficiaries and applicants rate the level of detail of information provided by Programme Authorities according to the survey data?",
+      "ground_truth": "According to Figure 6, 54% of beneficiaries rated the level of detail at the highest level (5 out of 5), while 45% of applicants gave the same highest rating. The data is presented on a 5-point scale from 1 to 5, showing that both groups generally find the information detailed enough.",
+      "question_type": "figure",
+      "project": "interreg_multimodal"
+    },
+    {
+      "question": "What percentage of beneficiaries found the programme information easily accessible and user friendly?",
+      "ground_truth": "According to Figure 7, 63% of beneficiaries found the information about the Interreg CBC Romania-Serbia Programme easily accessible and user friendly. For applicants, this figure was 54%. The response categories ranged from 'No information' to 'Easily accessible/user friendly'.",
+      "question_type": "figure",
+      "project": "interreg_multimodal"
+    },
+    {
+      "question": "What communication instruments does the programme use according to the instruments and actions table in the evaluation report?",
+      "ground_truth": "According to the instruments and actions table, the programme uses the following communication instruments: Events, Help desk, Information network, Signalling (EU logo and Programme logo plates), Institutional partnerships, Publications, Online channels (website, social media), Mass-media, and Promotional campaigns including infographics, flyers, catalogues, and agendas.",
+      "question_type": "table",
+      "project": "interreg_multimodal"
+    },
+    {
+      "question": "To what extent do beneficiaries consider that programme information supports them in defining and implementing high-impact projects?",
+      "ground_truth": "According to Figure 8, 42% of beneficiaries consider that the information about the Programme, provided through information and promotion activities, supports potential beneficiaries to define and implement projects with high impact to a great extent. The data is measured on a 5-point scale from 'very small extent' to 'great extent'.",
+      "question_type": "figure",
+      "project": "interreg_multimodal"
+    },
+    {
+      "question": "How many figures containing survey data visualizations are included in Annex 1 of the evaluation report, and what type of charts are they predominantly?",
+      "ground_truth": "Annex 1 (Data collected by the on-line survey) contains 12 figures with survey data visualizations. They are predominantly horizontal bar charts showing comparative data between beneficiaries and applicants. Some figures also include stacked bar charts for multi-point scale responses and pie charts for categorical data.",
+      "question_type": "figure",
+      "project": "interreg_multimodal"
+    },
+    {
+      "question": "What were the four categories of communication effectiveness measured in Figure 1, and how were responses scaled?",
+      "ground_truth": "Figure 1 measured communication effectiveness across four categories: promoting opportunities offered by the programme, generating project ideas, supporting the creation of partnerships, and capitalizing on project outcomes. Responses were measured on a 5-point scale from very efficient to very inefficient.",
+      "question_type": "figure",
+      "project": "interreg_multimodal"
+    },
+    {
+      "question": "According to Figure 2, what types of additional information did respondents most want to receive about the programme?",
+      "ground_truth": "According to Figure 2, the most requested additional information types were: State aids compliance (29%), Control and financial management (17%), Monitoring and evaluation (13%), and Dissemination and capitalization (13%). State aids compliance was by far the most demanded additional information category.",
+      "question_type": "figure",
+      "project": "interreg_multimodal"
+    },
+    {
+      "question": "How does the clarity and accessibility of communicated information rate according to the survey figure on terminology used?",
+      "ground_truth": "According to Figure 12, 38% of applicants rated the clarity and accessibility of terminology at the highest level (5 out of 5), while 47% rated it at level 4. This indicates that the majority of respondents (85% combined at levels 4 and 5) found the communicated information clear and accessible in terms of terminology used.",
+      "question_type": "figure",
+      "project": "interreg_multimodal"
+    }
+  ]
+}

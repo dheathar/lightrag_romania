@@ -1,0 +1,160 @@
+{
+  "dataset_info": {
+    "name": "Communication Evaluation Report - Interreg-IPA CBC Romania-Serbia Programme Implementation Evaluation",
+    "description": "Tests RAG quality on the Communication Evaluation Report for the Interreg-IPA CBC Romania-Serbia Programme. Covers communication strategy objectives, events, website analytics, survey results, and key recommendations from the 2014-2020 programming period evaluation.",
+    "source_document": "Communication Evaluation Report - Interreg-IPA CBC Romania-Serbia Programme Implementation Evaluation.pdf",
+    "language": "English"
+  },
+  "test_cases": [
+    {
+      "question": "What is the contract reference number for the Interreg-IPA CBC Romania-Serbia Programme Implementation Evaluation?",
+      "ground_truth": "The contract reference number is 213/13.06.2019.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "Who conducted the Interreg-IPA CBC Romania-Serbia Programme Implementation Evaluation?",
+      "ground_truth": "The evaluation was conducted by SC ACZ Consulting SRL & t33 SRL, an independent evaluator selected following a public tender procedure launched by the Romanian Ministry of Regional Development and Public Administration.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "What is the total budget for the Interreg-IPA CBC Romania-Serbia evaluation contract?",
+      "ground_truth": "The total budget for the evaluation contract is 226,560 lei.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "What is the implementation period for the Interreg-IPA CBC Romania-Serbia evaluation contract?",
+      "ground_truth": "The evaluation contract has an overall implementation period of 6 months, with the contract signed on 13th of June 2019.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "What programming period does the Interreg-IPA CBC Romania-Serbia Programme cover?",
+      "ground_truth": "The Interreg-IPA CBC Romania-Serbia Programme covers the programming period 2014-2020.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "What is the official website of the Interreg-IPA CBC Romania-Serbia Programme?",
+      "ground_truth": "The official website is www.romania-serbia.net, which provides information in three working languages: Romanian, Serbian, and English.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "How many events were organized for potential applicants, beneficiaries, and stakeholders by 2018, and what was the target?",
+      "ground_truth": "By 2018, 48 events were organized (18 in 2015-2016 and 30 in 2017-2018), achieving 120% of the 2019 target of 40 events. The 2023 target is 55 events.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "What was the achievement rate for website traffic on the Romania-Serbia programme website?",
+      "ground_truth": "The website achieved 307,894 page views (121,959 in 2015-2016 and 185,935 in 2017-2018), representing 128.3% of the 2019 target of 240,000 page views. The 2023 target is 480,000 page views.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "How many participants attended programme events by 2018, and how does this compare to targets?",
+      "ground_truth": "2,940 participants attended events (1,279 in 2015-2016 and 1,661 in 2017-2018), achieving 367.5% of the 2019 target of 800 participants. This also exceeded the 2023 target of 1,100 participants.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "Where and when were the European Cooperation Day events held in 2017 and 2018?",
+      "ground_truth": "In 2017, the European Cooperation Day event was held in Kikinda, Serbia with over 1,000 participants. In 2018, the event was held in Oravița with over 500 participants from the eligible area.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "How many projects were submitted for the second call of the Interreg-IPA CBC Romania-Serbia Programme?",
+      "ground_truth": "176 projects were submitted for the second call of the programme, which was launched on 27.11.2017.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "How many events were organized for the second call promotion, and how many potential beneficiaries participated?",
+      "ground_truth": "12 events were organized for the second call: 2 Launch events, 2 Partner Search Forums, and 8 Workshops. A total of 752 potential beneficiaries participated in these events.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "How many respondents participated in the online survey for the communication evaluation?",
+      "ground_truth": "102 respondents participated in the online survey: 78 applicants (37 from Romania, 41 from Serbia) and 24 beneficiaries (15 from Romania, 9 from Serbia).",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "What were the most effective communication channels according to the beneficiaries and applicants?",
+      "ground_truth": "The most effective communication channels were: Training sessions (81.69%), Official website (81.69%), Events (61.97%), and Newsletters (53.52%). Facebook was considered effective by 42.25% of respondents.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "What was the satisfaction rate for the Joint Secretariat (JS) responsiveness?",
+      "ground_truth": "83% of beneficiaries and 72% of applicants expressed high satisfaction with the JS members' responsiveness. Beneficiaries and applicants were also very satisfied with all responsible bodies (JS, MA and NA in Serbia).",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "What are the general objectives of the Interreg-IPA CBC Romania-Serbia Communication Strategy?",
+      "ground_truth": "The general objectives are: 1) To support the successful implementation, 2) To increase public awareness, 3) To increase potential beneficiary financial/selection understanding, 4) To ensure transparency in Funds/ensure level of trust of the general public, and 5) To increase the visibility of the Programme.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "What horizontal principles must the communication activities align with?",
+      "ground_truth": "Communication activities must align with: 1) Sustainable development (resource-efficient, non-harmful to environment), 2) Promoting equality between men and women, 3) Accessibility to all including ageing and those with disabilities/special needs, 4) Demographically conscious in economic terms (proposing communications which catalyse employability, productivity), and 5) Addressing climate change.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "What are the key MA responsibilities for communication activities?",
+      "ground_truth": "The MA responsibilities include: 1) Arranging a major information function for the operational programme kick-off, 2) Arranging large annual function highlighting programme funding options, strategies & successes, 3) Online enumeration of operations in line with Section 1 of Annex XII of Regulation 1303/2013, 4) Online publication of operations on programme's webpage, and 5) Updating programme's implementation news including main achievements.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "What were the key recommendations from the communication evaluation focus groups?",
+      "ground_truth": "The focus groups recommended: 1) Programme structures should focus on communication channels that proved effective, 2) More distribution of information through social media, 3) Introduction of communication indicators at project level for the next programming period, and 4) Organization of thematic training sessions on state aid and control/financial management.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "What topics did beneficiaries express the need for more information about?",
+      "ground_truth": "Beneficiaries requested more information on: State aid issues (29%), control and financial management (17%), monitoring and evaluation (13%), and result dissemination and capitalisation (13%). Applicants also wanted workshops on budget constructions, public procurement, and eMS functioning.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "How effective were the programme communication activities in supporting beneficiaries according to the survey?",
+      "ground_truth": "Beneficiaries considered communication activities very efficient in: Capitalising project outcome/result (50%), Promoting the opportunities offered by the programme (50%), and Supporting the creation of appropriate partnership (46%). The contribution in helping generate project ideas was weaker at 29%.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "What templates and support materials are available for beneficiaries for communication activities?",
+      "ground_truth": "The programme provides: 1) Visual Identity Manual (VIM) with detailed information for each category of communication materials, 2) Visual identity elements in .doc, .jpg, .cnd and .png formats (EU flag, Programme logo, fonts, headers), 3) Dissemination materials models (press release, presence list, PowerPoint, billboards, posters, self-adhesives, video-frames), and 4) A 'get inspired from other beneficiaries' section with best practice examples.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "What changes occurred in the communication strategy budget allocation during implementation?",
+      "ground_truth": "In the first version of the strategy, the MA had a large budget allocated for communication activities. However, during programme implementation, difficulties were encountered with the selection of contractors and preparation of related documents, so it was decided that a significant part of the budget should be directed to the JS.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "How many press releases and journalistic materials were generated by the programme?",
+      "ground_truth": "The programme generated 24 press releases and interviews by 2018 (13 press releases and 3 interviews in 2015-2016, and 11 press releases and 3 interviews in 2017-2018), achieving 120% of the 2019 target. Additionally, approximately 172 articles were published in 2017 and 155 journalistic materials in 2018.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "What specific objectives are covered by the Interreg-IPA CBC Romania-Serbia Programme according to the survey respondents?",
+      "ground_truth": "The programme covers 9 specific objectives: 1) Employment and labour mobility (8%), 2) Health and social infrastructure (8%), 3) Social and cultural inclusion (21%), 4) Environmental protection and sustainable use of natural resources (17%), 5) Environmental risks management and emergency preparedness (8%), 6) Mobility and transport infrastructure and services (13%), 7) Public utilities infrastructure (8%), 8) Investments for tourism networks growth and innovative tourism activities (13%), 9) Capacity building for quality and innovation of tourism services and products (17%).",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "What is the cut-off date for the communication evaluation exercise?",
+      "ground_truth": "The communication evaluation exercise covers all actions undertaken under the Interreg-IPA CBC Romania-Serbia Programme related to the programming period 2014-2020, until the cut-off date of 30th of June 2019.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "What are the evaluation questions addressed in the Communication Evaluation Report?",
+      "ground_truth": "The evaluation addresses five questions: 1) Do the communication activities lead to achievement of objectives set in the Communication Strategy? 2) Could more effect be achieved by using different instruments or actions? 3) How effective was the programme in supporting project communication activities? 4) Do communication activities have sufficient impact on awareness of beneficiaries/potential beneficiaries/general public? 5) What could be improved to highlight the EU contribution?",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "What is the recommendation regarding the 2023 communication indicator targets?",
+      "ground_truth": "The recommendation states that as the achievement rate for the indicators is very high (with some indicators already exceeding 2023 targets by 2018), the target value for 2023 should be increased.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "Why was the introduction of communication indicators at project level not recommended during the current programming period?",
+      "ground_truth": "Although the evaluation team recommended introducing communication indicators at project level for the next programming period, the programme structures argued that it does not seem efficient to introduce, at this stage of the programme, communication indicators for beneficiaries. This was validated at the focus group.",
+      "project": "interreg_romania_serbia"
+    },
+    {
+      "question": "What Working Package is mandatory for all projects under the IPA CBC Romania-Serbia programme?",
+      "ground_truth": "All projects must include the Working Package Communication, aimed at raising awareness about project and programme activities. As a result, all beneficiaries must allocate a specific budget and dedicate their attention to fulfilling the activities within this working package, which includes events and conferences, press releases, dissemination materials, and websites.",
+      "project": "interreg_romania_serbia"
+    }
+  ]
+}

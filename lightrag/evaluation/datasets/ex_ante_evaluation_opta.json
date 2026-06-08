@@ -1,0 +1,131 @@
+{
+  "dataset_info": {
+    "name": "Ex-ante Evaluation of Operational Programme Technical Assistance",
+    "description": "Tests RAG quality on the Ex-ante Evaluation of the Operational Programme Technical Assistance (OPTA) for Romania 2007-2013. This document uses custom font glyph encoding making it a challenging extraction test case — only vision-based extraction can reliably extract text from this PDF.",
+    "source_document": "Ex-ante Evaluation of Operational Programme Technical Assistance.pdf",
+    "language": "Romanian/English",
+    "note": "PDF uses non-standard glyph encoding; pypdf and Docling text extraction produce garbled output. Vision model processing is required for accurate text extraction."
+  },
+  "test_cases": [
+    {
+      "question": "What is the total budget of the Operational Programme Technical Assistance (OPTA) and how much is the EU contribution?",
+      "ground_truth": "The total budget of the Operational Programme Technical Assistance is approximately EUR 213 million. The EU contribution (from ERDF - European Regional Development Fund) amounts to EUR 170 million, which represents approximately 0.86% of the total EU money invested in Romania under Cohesion Policy 2007-2013. The national contribution is approximately EUR 42.6 million.",
+      "question_type": "factual",
+      "project": "opta_technical_assistance"
+    },
+    {
+      "question": "What are the three Priority Axes of the Operational Programme Technical Assistance?",
+      "ground_truth": "The three Priority Axes of OPTA are: Priority Axis 1 - Support for the implementation and coordination of Structural Instruments (EU investment of EUR 82.8 million), focusing on strengthening coordination and building administrative capacity; Priority Axis 2 - Further development and support for the functioning of the Single Management Information System (SMIS) (EU investment of EUR 53.4 million), focusing on system operation and data accessibility; Priority Axis 3 - Dissemination of information and promotion of Structural Instruments (EU investment of EUR 34.1 million), focusing on coordinated messaging to the public and potential beneficiaries.",
+      "question_type": "factual",
+      "project": "opta_technical_assistance"
+    },
+    {
+      "question": "Which institution serves as the Managing Authority for the Operational Programme Technical Assistance?",
+      "ground_truth": "The Managing Authority for the Operational Programme Technical Assistance (OPTA) is the Ministry of Public Finance of Romania. The Managing Authority is responsible for managing and implementing the operational programme efficiently, effectively and correctly.",
+      "question_type": "factual",
+      "project": "opta_technical_assistance"
+    },
+    {
+      "question": "What is the main objective of the Operational Programme Technical Assistance at national level?",
+      "ground_truth": "The objective of the Technical Assistance Operational Programme (OPTA) at national level is to ensure support for the coordination and the implementation of the Structural Instruments (regional funds) in Romania, to guarantee a reliable managing and monitoring system, and to ensure a coordinated delivery of general messages related to Structural Instruments.",
+      "question_type": "factual",
+      "project": "opta_technical_assistance"
+    },
+    {
+      "question": "What programming period does the Operational Programme Technical Assistance cover?",
+      "ground_truth": "The Operational Programme Technical Assistance covers the programming period 2007-2013. It was approved by European Commission Decision C/2007/3431 on July 11, 2007. The CCI (Common Code of Identification) is 2007RO161PO005.",
+      "question_type": "factual",
+      "project": "opta_technical_assistance"
+    },
+    {
+      "question": "What is the role of the SMIS (Single Management Information System) in the OPTA programme?",
+      "ground_truth": "The SMIS (Single Management Information System) is a key component addressed under Priority Axis 2 of OPTA. It serves as the central information system for managing and monitoring all Structural Instruments in Romania. The system ensures data accessibility for all institutions managing Structural Instruments, supports functional development, and enables efficient programme management and monitoring across all operational programmes.",
+      "question_type": "analytical",
+      "project": "opta_technical_assistance"
+    },
+    {
+      "question": "How does the OPTA contribute to Romania's National Strategic Reference Framework?",
+      "ground_truth": "Together with the other operational programmes, the OPTA substantially contributes to the achievement of the thematic priority established in the National Strategic Reference Framework (NSRF), namely 'Building Effective Administrative Capacity'. The programme supports this through strengthening coordination mechanisms, building administrative capacity of implementing actors, and ensuring efficient management of EU Structural Instruments.",
+      "question_type": "analytical",
+      "project": "opta_technical_assistance"
+    },
+    {
+      "question": "What are the key evaluation criteria assessed in the ex-ante evaluation of OPTA?",
+      "ground_truth": "The ex-ante evaluation of OPTA assesses several key criteria including: the relevance and consistency of the programme strategy; the quality of the implementation provisions; the coherence of the proposed budgetary allocations with the objectives; the quality of monitoring and evaluation procedures; the adequacy of management and implementation structures; and the expected impact and effectiveness of the programme measures. The evaluation also examines compliance with EU regulations and alignment with the National Strategic Reference Framework.",
+      "question_type": "analytical",
+      "project": "opta_technical_assistance"
+    },
+    {
+      "question": "What is the purpose of Priority Axis 3 regarding information dissemination?",
+      "ground_truth": "Priority Axis 3 focuses on the dissemination of information and promotion of Structural Instruments, with an EU investment of EUR 34.1 million. Its purpose is to ensure coordinated messaging to the general public and potential beneficiaries regarding regional funds, to increase awareness about EU funding opportunities, and to promote transparency in the use of Structural Instruments in Romania.",
+      "question_type": "factual",
+      "project": "opta_technical_assistance"
+    },
+    {
+      "question": "What percentage of total EU Cohesion Policy investment in Romania does the OPTA represent?",
+      "ground_truth": "The OPTA's EU contribution of EUR 170 million represents approximately 0.86% of the total EU money invested in Romania under Cohesion Policy for the 2007-2013 programming period.",
+      "question_type": "factual",
+      "project": "opta_technical_assistance"
+    },
+    {
+      "question": "What principles must the implementation of Structural Instruments meet according to the OPTA?",
+      "ground_truth": "According to the OPTA, the implementation of Structural Instruments in Romania must meet the principles and rules on partnership, programming, evaluation, management (including financial management), monitoring and control, on the basis of responsibilities shared between the Member States and the European Commission.",
+      "question_type": "factual",
+      "project": "opta_technical_assistance"
+    },
+    {
+      "question": "What is the financial allocation for Priority Axis 1 of OPTA and what does it focus on?",
+      "ground_truth": "Priority Axis 1 receives an EU investment of EUR 82.8 million, making it the largest priority axis. It focuses on supporting the implementation and coordination of Structural Instruments, specifically strengthening coordination and building administrative capacity across all implementing actors involved in managing EU structural funds in Romania.",
+      "question_type": "factual",
+      "project": "opta_technical_assistance"
+    },
+    {
+      "question": "What are the main challenges identified in the ex-ante evaluation regarding OPTA implementation?",
+      "ground_truth": "The ex-ante evaluation identified several challenges including: the need for adequate administrative capacity across all institutions managing Structural Instruments; the complexity of coordinating multiple operational programmes; the need for a reliable and efficient management information system (SMIS); ensuring proper financial management and control mechanisms; building capacity for monitoring and evaluation; and the challenge of raising public awareness about EU funding opportunities and transparency requirements.",
+      "question_type": "analytical",
+      "project": "opta_technical_assistance"
+    },
+    {
+      "question": "How is the OPTA programme funded in terms of EU and national co-financing?",
+      "ground_truth": "The OPTA programme is co-financed by the European Regional Development Fund (ERDF) and national funds. The total programme budget is approximately EUR 213 million, with the EU contributing EUR 170 million (approximately 80% co-financing rate) and the national contribution being approximately EUR 42.6 million (approximately 20%). This follows the standard co-financing principles for EU Structural Instruments.",
+      "question_type": "factual",
+      "project": "opta_technical_assistance"
+    },
+    {
+      "question": "What is the role of the ex-ante evaluation in the context of EU operational programmes?",
+      "ground_truth": "The ex-ante evaluation is a mandatory assessment conducted before the adoption of an operational programme. It aims to improve the quality of programming by providing an independent assessment of the programme's strategy, objectives, and implementation mechanisms. For OPTA, the ex-ante evaluation assessed the relevance of the strategy, quality of implementation provisions, consistency of budgetary allocations, and adequacy of management structures, providing recommendations for improvement before programme implementation began.",
+      "question_type": "analytical",
+      "project": "opta_technical_assistance"
+    },
+    {
+      "question": "What document was approved by European Commission Decision C/2007/3431?",
+      "ground_truth": "European Commission Decision C/2007/3431, dated July 11, 2007, approved the Operational Programme Technical Assistance (OPTA) for Romania for the 2007-2013 programming period. The programme was assigned the CCI code 2007RO161PO005.",
+      "question_type": "factual",
+      "project": "opta_technical_assistance"
+    },
+    {
+      "question": "How does Priority Axis 2 of OPTA support all other operational programmes in Romania?",
+      "ground_truth": "Priority Axis 2 supports all other operational programmes through the development and maintenance of the Single Management Information System (SMIS). This centralized system provides data accessibility for all institutions managing Structural Instruments, enables unified monitoring and reporting across all operational programmes, supports financial management and control, and ensures consistent data collection and analysis for programme management and evaluation purposes.",
+      "question_type": "analytical",
+      "project": "opta_technical_assistance"
+    },
+    {
+      "question": "What is the relationship between the OPTA and Romania's EU accession obligations?",
+      "ground_truth": "The OPTA is directly linked to Romania's EU accession and its obligations under EU Cohesion Policy. Following Romania's EU accession on January 1, 2007, the country became eligible for Structural Instruments under the 2007-2013 programming period. The OPTA was designed to ensure Romania has the administrative capacity, coordination mechanisms, and management systems necessary to properly implement and absorb EU structural funds across all operational programmes.",
+      "question_type": "analytical",
+      "project": "opta_technical_assistance"
+    },
+    {
+      "question": "What recommendations does the ex-ante evaluation provide for improving the monitoring and evaluation system?",
+      "ground_truth": "The ex-ante evaluation recommends strengthening the monitoring and evaluation system through: establishing clear and measurable indicators for each priority axis; ensuring adequate data collection mechanisms through the SMIS; building evaluation capacity within the Managing Authority and implementing bodies; establishing regular reporting and review procedures; ensuring transparency and accessibility of monitoring data; and aligning monitoring indicators with the National Strategic Reference Framework targets.",
+      "question_type": "analytical",
+      "project": "opta_technical_assistance"
+    },
+    {
+      "question": "What is the significance of the OPTA in the broader context of Romania's EU Structural Instruments?",
+      "ground_truth": "The OPTA plays a critical horizontal role across all EU Structural Instruments in Romania. While representing only 0.86% of total EU Cohesion Policy investment, it provides the essential infrastructure for successful implementation of all other operational programmes by: ensuring coordination between managing authorities, providing the SMIS management information system used by all programmes, building administrative capacity across implementing institutions, and communicating EU funding opportunities to the public. Without effective technical assistance, the absorption of much larger operational programmes would be significantly impaired.",
+      "question_type": "analytical",
+      "project": "opta_technical_assistance"
+    }
+  ]
+}
