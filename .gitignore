@@ -45,10 +45,12 @@ local_neo4jWorkDir/
 neo4jWorkDir/
 
 # Data & Storage
-inputs/
-output/
-rag_storage/
-data/
+/inputs/
+/output/
+/rag_storage/
+data/rag_storage/
+data/output/
+data/tiktoken/
 
 # Evaluation results
 lightrag/evaluation/results/
