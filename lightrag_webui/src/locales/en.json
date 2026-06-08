@@ -678,8 +678,8 @@
     "taxonomy": {
       "title": "Entity Taxonomy",
       "description": "DocForge uses Named Entity Recognition (NER) to extract typed entities from documents during knowledge graph construction. The entity type taxonomy is fully customizable — you can use the built-in defaults or define domain-specific types to improve extraction precision.",
-      "defaultTitle": "Default Entity Types (11 general-purpose)",
-      "defaultDesc": "The built-in taxonomy covers common information domains. These types work well for general documents across any subject area.",
+      "defaultTitle": "Configured Entity Types (15 EU/Romania-specific)",
+      "defaultDesc": "This deployment uses a domain-specific taxonomy optimised for EU structural fund evaluation reports, project assessments, and Romanian policy documents.",
       "domainTitle": "EU Cohesion Policy Entity Types (16 domain-specific)",
       "domainDesc": "For the Romanian EU Structural Funds analysis scenario, a specialized taxonomy captures the specific concepts that matter: operational programmes, managing authorities, budgets, regulations, and geographic regions.",
       "extensible": "The entity taxonomy is configured via the ENTITY_TYPES environment variable or the Settings tab. Changing entity types requires re-indexing documents to rebuild the knowledge graph with the new categories.",

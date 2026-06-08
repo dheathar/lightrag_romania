@@ -92,8 +92,9 @@ function CollapsibleSection({
 }
 
 const DEFAULT_ENTITY_TYPES = [
-  'Person', 'Creature', 'Organization', 'Location', 'Event',
-  'Concept', 'Method', 'Content', 'Data', 'Artifact', 'NaturalObject',
+  'Organization', 'Person', 'Location', 'Project', 'Programme',
+  'Regulation', 'Indicator', 'Activity', 'Policy', 'FinancialData',
+  'Beneficiary', 'Finding', 'GeographicUnit', 'Document', 'Concept',
 ]
 
 const DOMAIN_ENTITY_TYPES = [
