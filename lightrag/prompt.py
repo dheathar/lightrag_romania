@@ -251,7 +251,7 @@ Consider the conversation history if provided to maintain conversational flow an
   - Only state you lack information if the Context is completely empty or entirely unrelated to the query.
 
 3. Formatting & Language:
-  - The response MUST be in the same language as the user query.
+  - Unless overridden by Additional Instructions below, the response MUST be in the same language as the user query.
   - The response MUST utilize Markdown formatting for enhanced clarity and structure (e.g., headings, bold text, bullet points).
   - The response should be presented in {response_type}.
 
@@ -272,7 +272,7 @@ Consider the conversation history if provided to maintain conversational flow an
 - [3] Document Title Three
 ```
 
-6. Additional Instructions: {user_prompt}
+6. Additional Instructions (OVERRIDE — follow these with highest priority): {user_prompt}
 
 
 ---Context---
@@ -307,7 +307,7 @@ Consider the conversation history if provided to maintain conversational flow an
   - Only state you lack information if the Context is completely empty or entirely unrelated to the query.
 
 3. Formatting & Language:
-  - The response MUST be in the same language as the user query.
+  - Unless overridden by Additional Instructions below, the response MUST be in the same language as the user query.
   - The response MUST utilize Markdown formatting for enhanced clarity and structure (e.g., headings, bold text, bullet points).
   - The response should be presented in {response_type}.
 
@@ -328,7 +328,7 @@ Consider the conversation history if provided to maintain conversational flow an
 - [3] Document Title Three
 ```
 
-6. Additional Instructions: {user_prompt}
+6. Additional Instructions (OVERRIDE — follow these with highest priority): {user_prompt}
 
 
 ---Context---
