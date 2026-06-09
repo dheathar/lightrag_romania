@@ -441,6 +441,9 @@ export default function RetrievalTesting() {
                 return newMessages
               })
 
+              // Persist insights to history immediately
+              useSettingsStore.getState().setRetrievalHistory([...prevMessages, userMessage, assistantMessage])
+
               // Show in right panel and switch to Insights tab
               setLatestInsights(insights)
               setActiveMessageId(assistantMessage.id || null)
@@ -483,6 +486,9 @@ export default function RetrievalTesting() {
                       }
                       return newMessages
                     })
+
+                    // Persist reasoning to history
+                    useSettingsStore.getState().setRetrievalHistory([...prevMessages, userMessage, assistantMessage])
 
                     // Update right panel with reasoning
                     setLatestInsights({ ...insights, reasoning })
