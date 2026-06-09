@@ -9,7 +9,7 @@ import { useSettingsStore } from '@/stores/settings'
 import { useDebounce } from '@/hooks/useDebounce'
 import QuerySettings from '@/components/retrieval/QuerySettings'
 import { ChatMessage, MessageWithError } from '@/components/retrieval/ChatMessage'
-import { EraserIcon, SendIcon, CopyIcon, GitForkIcon, SlidersHorizontalIcon, SparklesIcon } from 'lucide-react'
+import { EraserIcon, SendIcon, CopyIcon, GitForkIcon, SlidersHorizontalIcon, SparklesIcon, PanelRightCloseIcon, PanelRightOpenIcon } from 'lucide-react'
 import { KnowledgeInsightsPanel } from '@/components/retrieval/KnowledgeInsightsPanel'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
@@ -144,7 +144,8 @@ export default function RetrievalTesting() {
   const [inputError, setInputError] = useState('')
   const [latestInsights, setLatestInsights] = useState<KnowledgeInsights | null>(null)
   const [latestIsGeneratingReasoning, setLatestIsGeneratingReasoning] = useState(false)
-  const [rightTab, setRightTab] = useState<'settings' | 'insights'>('settings') // Error message for input
+  const [rightTab, setRightTab] = useState<'settings' | 'insights'>('settings')
+  const [sidebarOpen, setSidebarOpen] = useState(true) // Error message for input
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null)
 
   // Smart switching logic: use Input for single line, Textarea for multi-line
@@ -931,6 +932,17 @@ export default function RetrievalTesting() {
           <Button
             type="button"
             variant="ghost"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            size="icon"
+            side="top"
+            tooltip={sidebarOpen ? 'Hide panel' : 'Show panel'}
+            className="rounded-xl text-muted-foreground shrink-0"
+          >
+            {sidebarOpen ? <PanelRightCloseIcon className="size-4" /> : <PanelRightOpenIcon className="size-4" />}
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
             onClick={clearMessages}
             disabled={isLoading}
             size="icon"
@@ -954,7 +966,7 @@ export default function RetrievalTesting() {
       </div>
 
       {/* Right panel — tabbed Settings / Insights */}
-      <div className="lumen-glass flex shrink-0 flex-col w-[300px] rounded-[20px] overflow-hidden">
+      {sidebarOpen && <div className="lumen-glass flex shrink-0 flex-col w-[300px] rounded-[20px] overflow-hidden">
         {/* Tab bar */}
         <div className="flex gap-0 border-b border-border/30 px-3 pt-3 shrink-0">
           <button
@@ -998,7 +1010,7 @@ export default function RetrievalTesting() {
             />
           )}
         </div>
-      </div>
+      </div>}
     </div>
   )
 }
