@@ -422,7 +422,8 @@ export default function RetrievalTesting() {
                 entities: dataResponse.data.entities || [],
                 relationships: dataResponse.data.relationships || [],
                 keywords: dataResponse.metadata?.keywords || { high_level: [], low_level: [] },
-                processingInfo: dataResponse.metadata?.processing_info || {}
+                processingInfo: dataResponse.metadata?.processing_info || {},
+                chunks: dataResponse.data.chunks || []
               }
 
               // Update message with insights

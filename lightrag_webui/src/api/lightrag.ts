@@ -172,6 +172,7 @@ export type KnowledgeInsights = {
   keywords: QueryKeywords
   processingInfo: ProcessingInfo
   reasoning?: string  // LLM-generated reasoning about the retrieved context
+  chunks?: KGChunk[]  // Raw document passages used to form the answer
 }
 
 export type Message = {

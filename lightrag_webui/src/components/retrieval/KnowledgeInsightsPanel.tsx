@@ -1,6 +1,6 @@
 import { useState, memo } from 'react'
-import { KnowledgeInsights, KGEntity, KGRelationship } from '@/api/lightrag'
-import { BrainIcon, LoaderIcon } from 'lucide-react'
+import { KnowledgeInsights, KGEntity, KGRelationship, KGChunk } from '@/api/lightrag'
+import { BrainIcon, LoaderIcon, FileTextIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useTranslation } from 'react-i18next'
 
@@ -113,6 +113,34 @@ const RelationshipCard = memo(({ relationship }: { relationship: KGRelationship 
 })
 RelationshipCard.displayName = 'RelationshipCard'
 
+const SourceCard = memo(({ chunk }: { chunk: KGChunk }) => {
+  const [expanded, setExpanded] = useState(false)
+  const fileName = chunk.file_path?.split('/').pop() || chunk.file_path || 'Unknown source'
+  const preview = chunk.content?.slice(0, 150) || ''
+  const hasMore = (chunk.content?.length || 0) > 150
+
+  return (
+    <div
+      className={cn(
+        'lumen-glass-soft p-3 rounded-xl transition-shadow',
+        hasMore && 'cursor-pointer hover:shadow-[0_8px_20px_-12px_rgba(146,80,31,0.4)]'
+      )}
+      onClick={() => hasMore && setExpanded(!expanded)}
+    >
+      <div className="flex items-center gap-2 mb-1.5">
+        <FileTextIcon className="w-3 h-3 shrink-0 text-primary" />
+        <span className="font-semibold text-xs text-foreground truncate flex-1" title={chunk.file_path}>
+          {fileName}
+        </span>
+      </div>
+      <div className={cn('text-[11px] text-muted-foreground leading-relaxed', !expanded && 'line-clamp-3')}>
+        {expanded ? chunk.content : preview}{hasMore && !expanded && '…'}
+      </div>
+    </div>
+  )
+})
+SourceCard.displayName = 'SourceCard'
+
 export const KnowledgeInsightsPanel = memo(({ insights, isGeneratingReasoning }: KnowledgeInsightsPanelProps) => {
   const { t } = useTranslation()
   const hasEntities = insights.entities && insights.entities.length > 0
@@ -186,6 +214,18 @@ export const KnowledgeInsightsPanel = memo(({ insights, isGeneratingReasoning }:
               <span key={`low-${idx}`} className="text-[10px] px-2.5 py-1 rounded-full bg-white/55 dark:bg-white/5 text-muted-foreground border border-white/60 dark:border-white/10">
                 {kw}
               </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* SOURCES */}
+      {insights.chunks && insights.chunks.length > 0 && (
+        <div>
+          <SectionLabel>SOURCES</SectionLabel>
+          <div className="space-y-2">
+            {insights.chunks.slice(0, 8).map((chunk, idx) => (
+              <SourceCard key={`chunk-${idx}`} chunk={chunk} />
             ))}
           </div>
         </div>
