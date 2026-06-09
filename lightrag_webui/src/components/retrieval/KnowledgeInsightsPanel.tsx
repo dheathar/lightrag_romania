@@ -3,6 +3,8 @@ import { KnowledgeInsights, KGEntity, KGRelationship, KGChunk } from '@/api/ligh
 import { BrainIcon, LoaderIcon, FileTextIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useTranslation } from 'react-i18next'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 interface KnowledgeInsightsPanelProps {
   insights: KnowledgeInsights
@@ -166,7 +168,12 @@ export const KnowledgeInsightsPanel = memo(({ insights, isGeneratingReasoning }:
               {isGeneratingReasoning && <LoaderIcon className="w-3 h-3 animate-spin ml-auto" />}
             </div>
             {insights.reasoning ? (
-              <p className="text-[11px] text-foreground/85 leading-relaxed">{insights.reasoning}</p>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                className="prose dark:prose-invert max-w-none text-[11px] leading-relaxed text-foreground/85 prose-p:my-1 prose-headings:text-[12px] prose-headings:font-semibold prose-headings:my-1.5 prose-ul:my-1 prose-ol:my-1 prose-li:my-0.5 prose-strong:text-foreground prose-strong:font-semibold"
+              >
+                {insights.reasoning}
+              </ReactMarkdown>
             ) : (
               <p className="text-[10px] text-muted-foreground italic">
                 {t('retrievePanel.insights.generatingReasoning', 'Analyzing knowledge graph context...')}
