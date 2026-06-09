@@ -1,8 +1,7 @@
 import { ReactNode, useEffect, useMemo, useRef, memo, useState } from 'react' // Import useMemo
-import { Message, KnowledgeInsights } from '@/api/lightrag'
+import { Message } from '@/api/lightrag'
 import useTheme from '@/hooks/useTheme'
 import { cn } from '@/lib/utils'
-import { KnowledgeInsightsPanel } from './KnowledgeInsightsPanel'
 
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -378,13 +377,6 @@ export const ChatMessage = ({
               })}
             </div>
           </div>
-      )}
-      {/* Knowledge Graph Insights Section */}
-      {message.role === 'assistant' && (message.knowledgeInsights || message.isGeneratingReasoning) && (
-        <KnowledgeInsightsPanel
-          insights={message.knowledgeInsights || { entities: [], relationships: [], keywords: { high_level: [], low_level: [] }, processingInfo: {} }}
-          isGeneratingReasoning={message.isGeneratingReasoning}
-        />
       )}
       {/* Loading indicator - only show in active tab */}
       {isTabActive && (() => {

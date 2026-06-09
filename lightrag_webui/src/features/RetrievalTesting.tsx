@@ -9,7 +9,8 @@ import { useSettingsStore } from '@/stores/settings'
 import { useDebounce } from '@/hooks/useDebounce'
 import QuerySettings from '@/components/retrieval/QuerySettings'
 import { ChatMessage, MessageWithError } from '@/components/retrieval/ChatMessage'
-import { EraserIcon, SendIcon, CopyIcon, GitForkIcon } from 'lucide-react'
+import { EraserIcon, SendIcon, CopyIcon, GitForkIcon, SlidersHorizontalIcon, SparklesIcon } from 'lucide-react'
+import { KnowledgeInsightsPanel } from '@/components/retrieval/KnowledgeInsightsPanel'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { copyToClipboard } from '@/utils/clipboard'
@@ -140,7 +141,10 @@ export default function RetrievalTesting() {
   })
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [inputError, setInputError] = useState('') // Error message for input
+  const [inputError, setInputError] = useState('')
+  const [latestInsights, setLatestInsights] = useState<KnowledgeInsights | null>(null)
+  const [latestIsGeneratingReasoning, setLatestIsGeneratingReasoning] = useState(false)
+  const [rightTab, setRightTab] = useState<'settings' | 'insights'>('settings') // Error message for input
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null)
 
   // Smart switching logic: use Input for single line, Textarea for multi-line
@@ -434,10 +438,15 @@ export default function RetrievalTesting() {
                 return newMessages
               })
 
+              // Show in right panel and switch to Insights tab
+              setLatestInsights(insights)
+              setRightTab('insights')
+
               // Generate LLM reasoning if enabled
               if (enableKGReasoning && (insights.entities.length > 0 || insights.relationships.length > 0)) {
                 // Mark as generating reasoning
                 assistantMessage.isGeneratingReasoning = true
+                setLatestIsGeneratingReasoning(true)
                 setMessages((prev) => {
                   const newMessages = [...prev]
                   const lastMessage = newMessages[newMessages.length - 1]
@@ -470,11 +479,17 @@ export default function RetrievalTesting() {
                       }
                       return newMessages
                     })
+
+                    // Update right panel with reasoning
+                    setLatestInsights({ ...insights, reasoning })
+                    setLatestIsGeneratingReasoning(false)
                   }
                 } catch (reasoningError) {
                   console.error('Failed to generate KG reasoning:', reasoningError)
+                  setLatestIsGeneratingReasoning(false)
                 } finally {
                   assistantMessage.isGeneratingReasoning = false
+                  setLatestIsGeneratingReasoning(false)
                   setMessages((prev) => {
                     const newMessages = [...prev]
                     const lastMessage = newMessages[newMessages.length - 1]
@@ -937,7 +952,52 @@ export default function RetrievalTesting() {
         </form>
       </div>
 
-      <QuerySettings />
+      {/* Right panel — tabbed Settings / Insights */}
+      <div className="lumen-glass flex shrink-0 flex-col w-[300px] rounded-[20px] overflow-hidden">
+        {/* Tab bar */}
+        <div className="flex gap-0 border-b border-border/30 px-3 pt-3 shrink-0">
+          <button
+            onClick={() => setRightTab('settings')}
+            className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold transition-colors border-b-2 -mb-px ${
+              rightTab === 'settings'
+                ? 'text-primary border-primary'
+                : 'text-muted-foreground border-transparent hover:text-foreground'
+            }`}
+          >
+            <SlidersHorizontalIcon className="w-3.5 h-3.5" />
+            {t('retrievePanel.querySettings.parametersTitle', 'Settings')}
+          </button>
+          {latestInsights && (
+            <button
+              onClick={() => setRightTab('insights')}
+              className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold transition-colors border-b-2 -mb-px ${
+                rightTab === 'insights'
+                  ? 'text-primary border-primary'
+                  : 'text-muted-foreground border-transparent hover:text-foreground'
+              }`}
+            >
+              <SparklesIcon className="w-3.5 h-3.5" />
+              {t('retrievePanel.insights.title', 'Insights')}
+              {((latestInsights.entities?.length || 0) + (latestInsights.relationships?.length || 0)) > 0 && (
+                <span className="text-[9px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full font-medium">
+                  {(latestInsights.entities?.length || 0) + (latestInsights.relationships?.length || 0)}
+                </span>
+              )}
+            </button>
+          )}
+        </div>
+
+        {/* Tab content */}
+        <div className="flex-1 overflow-hidden p-3">
+          {rightTab === 'settings' && <QuerySettings />}
+          {rightTab === 'insights' && latestInsights && (
+            <KnowledgeInsightsPanel
+              insights={latestInsights}
+              isGeneratingReasoning={latestIsGeneratingReasoning}
+            />
+          )}
+        </div>
+      </div>
     </div>
   )
 }

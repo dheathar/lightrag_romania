@@ -1,10 +1,8 @@
 import { useCallback, useMemo } from 'react'
 import { QueryMode, QueryRequest } from '@/api/lightrag'
-// Removed unused import for Text component
 import Checkbox from '@/components/ui/Checkbox'
 import Input from '@/components/ui/Input'
 import UserPromptInputWithHistory from '@/components/ui/UserPromptInputWithHistory'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card'
 import {
   Select,
   SelectContent,
@@ -73,14 +71,9 @@ export default function QuerySettings() {
   )
 
   return (
-    <Card className="lumen-glass flex shrink-0 flex-col w-[280px] rounded-[20px]">
-      <CardHeader className="px-4 pt-4 pb-2">
-        <CardTitle>{t('retrievePanel.querySettings.parametersTitle')}</CardTitle>
-        <CardDescription className="sr-only">{t('retrievePanel.querySettings.parametersDescription')}</CardDescription>
-      </CardHeader>
-      <CardContent className="m-0 flex grow flex-col p-0 text-xs">
-        <div className="relative size-full">
-          <div className="absolute inset-0 flex flex-col gap-2 overflow-auto px-2 pr-2">
+    <div className="flex flex-col h-full text-xs">
+      <div className="relative flex-1">
+        <div className="absolute inset-0 flex flex-col gap-2 overflow-auto px-1 pr-1">
             {/* User Prompt - Moved to top for better dropdown space */}
             <>
               <TooltipProvider>
@@ -570,9 +563,8 @@ export default function QuerySettings() {
               </div>
             </>
 
-          </div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   )
 }
