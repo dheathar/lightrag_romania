@@ -145,7 +145,8 @@ export default function RetrievalTesting() {
   const [latestInsights, setLatestInsights] = useState<KnowledgeInsights | null>(null)
   const [latestIsGeneratingReasoning, setLatestIsGeneratingReasoning] = useState(false)
   const [rightTab, setRightTab] = useState<'settings' | 'insights'>('settings')
-  const [sidebarOpen, setSidebarOpen] = useState(true) // Error message for input
+  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [activeMessageId, setActiveMessageId] = useState<string | null>(null)
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null)
 
   // Smart switching logic: use Input for single line, Textarea for multi-line
@@ -442,6 +443,7 @@ export default function RetrievalTesting() {
 
               // Show in right panel and switch to Insights tab
               setLatestInsights(insights)
+              setActiveMessageId(assistantMessage.id || null)
               setRightTab('insights')
 
               // Generate LLM reasoning if enabled
@@ -808,6 +810,27 @@ export default function RetrievalTesting() {
     }
   }, [t])
 
+  // Load insights for a clicked message pair
+  const handleMessageClick = useCallback((message: MessageWithError) => {
+    // For user messages, find the next assistant message; for assistant messages use directly
+    const msgs = useSettingsStore.getState().retrievalHistory as MessageWithError[]
+    const all = messages
+    let target: MessageWithError | undefined
+
+    if (message.role === 'user') {
+      const idx = all.findIndex((m) => m.id === message.id)
+      target = all.slice(idx + 1).find((m) => m.role === 'assistant')
+    } else {
+      target = message
+    }
+
+    if (target?.knowledgeInsights) {
+      setLatestInsights(target.knowledgeInsights)
+      setActiveMessageId(target.id || null)
+      setRightTab('insights')
+    }
+  }, [messages])
+
   return (
     <div className="lumen-field flex size-full gap-4 px-4 pt-2 pb-14 overflow-hidden">
       <div className="flex grow flex-col gap-3">
@@ -831,14 +854,26 @@ export default function RetrievalTesting() {
                   </span>
                 </div>
               ) : (
-                messages.map((message) => (
+                messages.map((message) => {
+                  // Determine if this message pair is the active one
+                  const assistantId = message.role === 'assistant' ? message.id : null
+                  const isActive = assistantId
+                    ? activeMessageId === assistantId
+                    : messages.slice(messages.findIndex(m => m.id === message.id) + 1).find(m => m.role === 'assistant')?.id === activeMessageId
+                  const hasInsights = message.role === 'assistant'
+                    ? !!message.knowledgeInsights
+                    : !!messages.slice(messages.findIndex(m => m.id === message.id) + 1).find(m => m.role === 'assistant')?.knowledgeInsights
+
+                  return (
                   <div
                     key={message.id}
-                    className={`group flex ${message.role === 'user' ? 'justify-end' : 'justify-start'} items-end gap-2`}
+                    className={`group flex ${message.role === 'user' ? 'justify-end' : 'justify-start'} items-end gap-2 rounded-xl transition-colors ${isActive ? 'bg-primary/5' : ''} ${hasInsights ? 'cursor-pointer' : ''}`}
+                    onClick={() => hasInsights && handleMessageClick(message)}
+                    title={hasInsights ? 'Click to view insights' : undefined}
                   >
                     {message.role === 'user' && (
                       <Button
-                        onClick={() => handleCopyMessage(message)}
+                        onClick={(e) => { e.stopPropagation(); handleCopyMessage(message) }}
                         className="mb-2 size-6 rounded-md opacity-0 transition-opacity group-hover:opacity-60 hover:!opacity-100 shrink-0"
                         tooltip={t('retrievePanel.chatMessage.copyTooltip')}
                         variant="ghost"
@@ -850,7 +885,7 @@ export default function RetrievalTesting() {
                     <ChatMessage message={message} isTabActive={isRetrievalTabActive} />
                     {message.role === 'assistant' && (
                       <Button
-                        onClick={() => handleCopyMessage(message)}
+                        onClick={(e) => { e.stopPropagation(); handleCopyMessage(message) }}
                         className="mb-2 size-6 rounded-md opacity-0 transition-opacity group-hover:opacity-60 hover:!opacity-100 shrink-0"
                         tooltip={t('retrievePanel.chatMessage.copyTooltip')}
                         variant="ghost"
@@ -860,7 +895,8 @@ export default function RetrievalTesting() {
                       </Button>
                     )}
                   </div>
-                ))
+                  )
+                })
               )}
               <div ref={messagesEndRef} className="pb-1" />
             </div>
