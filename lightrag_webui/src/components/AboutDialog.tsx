@@ -275,6 +275,19 @@ export default function AboutDialog() {
           </div>
         </CollapsibleSection>
 
+        {/* Custom Prompt Examples */}
+        <CollapsibleSection title={t('about.customPromptTitle')}>
+          <p className="text-xs text-muted-foreground mb-3">{t('about.customPromptDesc')}</p>
+          <div className="space-y-2">
+            {(t('about.customPrompts', { returnObjects: true }) as { label: string; value: string }[]).map((item) => (
+              <div key={item.label} className="lumen-glass-soft rounded-xl px-3 py-2 flex flex-col gap-0.5">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{item.label}</span>
+                <code className="text-xs text-foreground font-mono">{item.value}</code>
+              </div>
+            ))}
+          </div>
+        </CollapsibleSection>
+
         {/* Tab Guide */}
         <CollapsibleSection title={t('about.tabGuideTitle')}>
           <div className="space-y-2">
