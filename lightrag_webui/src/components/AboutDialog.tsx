@@ -250,6 +250,31 @@ export default function AboutDialog() {
           </div>
         </div>
 
+        {/* Chat Prefix Guide */}
+        <CollapsibleSection title={t('about.chatPrefixTitle')}>
+          <p className="text-xs text-muted-foreground mb-3">{t('about.chatPrefixDesc')}</p>
+          <div className="space-y-2">
+            {([
+              ['local',  '/local your question'],
+              ['global', '/global your question'],
+              ['hybrid', '/hybrid your question'],
+              ['naive',  '/naive your question'],
+              ['mix',    '/mix your question'],
+              ['bypass', '/bypass your question'],
+            ] as const).map(([key, example]) => (
+              <div key={key} className="flex gap-3 items-start">
+                <code className="shrink-0 text-[10px] font-mono bg-primary/10 text-primary px-2 py-0.5 rounded">
+                  /{key}
+                </code>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-xs text-foreground">{t(`about.chatPrefixes.${key}`)}</span>
+                  <span className="text-[10px] text-muted-foreground italic">{t('about.chatPrefixExample')}: <code className="font-mono">{example}</code></span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CollapsibleSection>
+
         {/* Tab Guide */}
         <CollapsibleSection title={t('about.tabGuideTitle')}>
           <div className="space-y-2">

@@ -691,6 +691,17 @@
         "regulatory": "Regulatory"
       }
     },
+    "chatPrefixTitle": "Chat Query Prefixes",
+    "chatPrefixDesc": "Type a /prefix before your question to override the retrieval mode for that message only. The default mode from the Settings panel is used when no prefix is given.",
+    "chatPrefixes": {
+      "local": "Focus on specific named entities — best for precise who/what questions.",
+      "global": "Use community summaries — best for broad thematic questions.",
+      "hybrid": "Combine local entity and global community retrieval.",
+      "naive": "Direct vector search without the knowledge graph — fastest.",
+      "mix": "Integrate knowledge graph and vector retrieval — recommended with reranking enabled.",
+      "bypass": "Skip retrieval entirely and send the question straight to the LLM."
+    },
+    "chatPrefixExample": "Example",
     "tabGuideTitle": "Navigation Guide",
     "tabs": {
       "documents": "Upload and manage your documents (PDF, DOCX, PPTX, XLSX, and more). Track processing status and view details.",
