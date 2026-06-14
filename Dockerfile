@@ -107,11 +107,12 @@ RUN --mount=type=cache,target=/root/.local/share/uv \
     uv sync --frozen --no-dev --extra api --extra offline --extra docling --no-editable \
     && /app/.venv/bin/python -m ensurepip --upgrade
 
-# Swap opencv-python → opencv-python-headless AFTER uv sync
-# Order matters: uninstall full first (so its cv2.so is removed), then install headless
-# This eliminates the libGL.so.1 dependency as a belt-and-suspenders measure
-RUN /app/.venv/bin/pip uninstall --yes opencv-python 2>/dev/null || true \
-    && /app/.venv/bin/pip install --quiet "opencv-python-headless"
+# Belt-and-suspenders: replace opencv-python with the headless variant so cv2 has
+# no libGL dependency at all. Use `uv pip` because the uv-created venv has no
+# standalone `pip` binary (a plain /app/.venv/bin/pip call fails with exit 127).
+# Even without this, libgl1 (installed above) already provides libGL.so.1.
+RUN uv pip uninstall --python /app/.venv/bin/python opencv-python 2>/dev/null || true \
+    && uv pip install --python /app/.venv/bin/python opencv-python-headless
 
 # Create persistent data directories AFTER package installation
 RUN mkdir -p /app/data/rag_storage /app/data/inputs /app/data/tiktoken
