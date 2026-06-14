@@ -9,8 +9,10 @@ import { useSettingsStore } from '@/stores/settings'
 import { useDebounce } from '@/hooks/useDebounce'
 import QuerySettings from '@/components/retrieval/QuerySettings'
 import { ChatMessage, MessageWithError } from '@/components/retrieval/ChatMessage'
-import { EraserIcon, SendIcon, CopyIcon, GitForkIcon, SlidersHorizontalIcon, SparklesIcon, PanelRightCloseIcon, PanelRightOpenIcon, DownloadIcon } from 'lucide-react'
+import { EraserIcon, SendIcon, CopyIcon, GitForkIcon, SlidersHorizontalIcon, SparklesIcon, DownloadIcon, ChevronRightIcon, ChevronLeftIcon } from 'lucide-react'
 import { buildExportHtml, downloadHtml } from '@/lib/exportConversation'
+import { cn } from '@/lib/utils'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/Tooltip'
 import { KnowledgeInsightsPanel } from '@/components/retrieval/KnowledgeInsightsPanel'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
@@ -976,44 +978,6 @@ export default function RetrievalTesting() {
           <Button
             type="button"
             variant="ghost"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            size="icon"
-            side="top"
-            tooltip={sidebarOpen ? 'Hide panel' : 'Show panel'}
-            className="rounded-xl text-muted-foreground shrink-0"
-          >
-            {sidebarOpen ? <PanelRightCloseIcon className="size-4" /> : <PanelRightOpenIcon className="size-4" />}
-          </Button>
-          {/* Export conversation */}
-          <div className="flex items-center gap-0.5 shrink-0">
-            <button
-              type="button"
-              onClick={() => setExportTheme('light')}
-              className={`px-1.5 py-0.5 text-[10px] font-semibold rounded-l border border-r-0 transition-colors ${exportTheme === 'light' ? 'bg-primary text-primary-foreground border-primary' : 'text-muted-foreground border-border hover:text-foreground'}`}
-            >L</button>
-            <button
-              type="button"
-              onClick={() => setExportTheme('dark')}
-              className={`px-1.5 py-0.5 text-[10px] font-semibold rounded-r border transition-colors ${exportTheme === 'dark' ? 'bg-primary text-primary-foreground border-primary' : 'text-muted-foreground border-border hover:text-foreground'}`}
-            >D</button>
-          </div>
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            side="top"
-            tooltip={`Export conversation (${exportTheme})`}
-            className="rounded-xl text-muted-foreground shrink-0"
-            onClick={() => {
-              const html = buildExportHtml(messages, exportTheme)
-              downloadHtml(html, `docforge-export-${exportTheme}.html`)
-            }}
-          >
-            <DownloadIcon className="size-4" />
-          </Button>
-          <Button
-            type="button"
-            variant="ghost"
             onClick={clearMessages}
             disabled={isLoading}
             size="icon"
@@ -1036,52 +1000,176 @@ export default function RetrievalTesting() {
         </form>
       </div>
 
-      {/* Right panel — tabbed Settings / Insights */}
-      {sidebarOpen && <div className="lumen-glass flex shrink-0 flex-col w-[300px] rounded-[20px] overflow-hidden">
-        {/* Tab bar */}
-        <div className="flex gap-0 border-b border-border/30 px-3 pt-3 shrink-0">
-          <button
-            onClick={() => setRightTab('settings')}
-            className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold transition-colors border-b-2 -mb-px ${
-              rightTab === 'settings'
-                ? 'text-primary border-primary'
-                : 'text-muted-foreground border-transparent hover:text-foreground'
-            }`}
-          >
-            <SlidersHorizontalIcon className="w-3.5 h-3.5" />
-            {t('retrievePanel.querySettings.parametersTitle', 'Settings')}
-          </button>
-          {latestInsights && (
-            <button
-              onClick={() => setRightTab('insights')}
-              className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold transition-colors border-b-2 -mb-px ${
-                rightTab === 'insights'
-                  ? 'text-primary border-primary'
-                  : 'text-muted-foreground border-transparent hover:text-foreground'
-              }`}
-            >
-              <SparklesIcon className="w-3.5 h-3.5" />
-              {t('retrievePanel.insights.title', 'Insights')}
-              {((latestInsights.entities?.length || 0) + (latestInsights.relationships?.length || 0)) > 0 && (
-                <span className="text-[9px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full font-medium">
-                  {(latestInsights.entities?.length || 0) + (latestInsights.relationships?.length || 0)}
-                </span>
+      {/* Right panel — collapsible like AppSidebar */}
+      <div className={cn(
+        'lumen-glass flex shrink-0 flex-col rounded-[20px] overflow-hidden transition-all duration-200',
+        sidebarOpen ? 'w-[300px]' : 'w-12'
+      )}>
+        {sidebarOpen ? (
+          <>
+            {/* Tab bar + export controls */}
+            <div className="flex items-center gap-0 border-b border-border/30 px-3 pt-3 shrink-0">
+              <button
+                onClick={() => setRightTab('settings')}
+                className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold transition-colors border-b-2 -mb-px ${
+                  rightTab === 'settings'
+                    ? 'text-primary border-primary'
+                    : 'text-muted-foreground border-transparent hover:text-foreground'
+                }`}
+              >
+                <SlidersHorizontalIcon className="w-3.5 h-3.5" />
+                {t('retrievePanel.querySettings.parametersTitle', 'Settings')}
+              </button>
+              {latestInsights && (
+                <button
+                  onClick={() => setRightTab('insights')}
+                  className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold transition-colors border-b-2 -mb-px ${
+                    rightTab === 'insights'
+                      ? 'text-primary border-primary'
+                      : 'text-muted-foreground border-transparent hover:text-foreground'
+                  }`}
+                >
+                  <SparklesIcon className="w-3.5 h-3.5" />
+                  {t('retrievePanel.insights.title', 'Insights')}
+                  {((latestInsights.entities?.length || 0) + (latestInsights.relationships?.length || 0)) > 0 && (
+                    <span className="text-[9px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full font-medium">
+                      {(latestInsights.entities?.length || 0) + (latestInsights.relationships?.length || 0)}
+                    </span>
+                  )}
+                </button>
               )}
-            </button>
-          )}
-        </div>
+              {/* Export controls pushed to right */}
+              <div className="ml-auto flex items-center gap-0.5 pb-px">
+                <button
+                  type="button"
+                  onClick={() => setExportTheme('light')}
+                  className={`px-1.5 py-0.5 text-[10px] font-semibold rounded-l border border-r-0 transition-colors ${exportTheme === 'light' ? 'bg-primary text-primary-foreground border-primary' : 'text-muted-foreground border-border hover:text-foreground'}`}
+                >L</button>
+                <button
+                  type="button"
+                  onClick={() => setExportTheme('dark')}
+                  className={`px-1.5 py-0.5 text-[10px] font-semibold rounded-r border transition-colors ${exportTheme === 'dark' ? 'bg-primary text-primary-foreground border-primary' : 'text-muted-foreground border-border hover:text-foreground'}`}
+                >D</button>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button
+                        type="button"
+                        onClick={() => { const html = buildExportHtml(messages, exportTheme); downloadHtml(html, `docforge-export-${exportTheme}.html`) }}
+                        className="ml-1 p-1 rounded text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        <DownloadIcon className="w-3.5 h-3.5" />
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent side="left" sideOffset={6}>Export ({exportTheme})</TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
+            </div>
 
-        {/* Tab content */}
-        <div className="flex-1 overflow-hidden p-3">
-          {rightTab === 'settings' && <QuerySettings />}
-          {rightTab === 'insights' && latestInsights && (
-            <KnowledgeInsightsPanel
-              insights={latestInsights}
-              isGeneratingReasoning={latestIsGeneratingReasoning}
-            />
-          )}
+            {/* Tab content */}
+            <div className="flex-1 overflow-hidden p-3">
+              {rightTab === 'settings' && <QuerySettings />}
+              {rightTab === 'insights' && latestInsights && (
+                <KnowledgeInsightsPanel
+                  insights={latestInsights}
+                  isGeneratingReasoning={latestIsGeneratingReasoning}
+                />
+              )}
+            </div>
+          </>
+        ) : (
+          /* Collapsed: icon-only strip */
+          <nav className="flex-1 py-3 flex flex-col gap-1 px-1 overflow-hidden">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    onClick={() => { setRightTab('settings'); setSidebarOpen(true) }}
+                    className={cn(
+                      'w-full flex justify-center items-center py-2 rounded-lg transition-colors',
+                      rightTab === 'settings'
+                        ? 'bg-primary/10 text-primary'
+                        : 'text-muted-foreground hover:bg-accent hover:text-foreground'
+                    )}
+                  >
+                    <SlidersHorizontalIcon className="h-4 w-4" />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent side="left" sideOffset={8}>
+                  {t('retrievePanel.querySettings.parametersTitle', 'Settings')}
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+            {latestInsights && (
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <button
+                      onClick={() => { setRightTab('insights'); setSidebarOpen(true) }}
+                      className={cn(
+                        'w-full flex justify-center items-center py-2 rounded-lg transition-colors',
+                        rightTab === 'insights'
+                          ? 'bg-primary/10 text-primary'
+                          : 'text-muted-foreground hover:bg-accent hover:text-foreground'
+                      )}
+                    >
+                      <SparklesIcon className="h-4 w-4" />
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent side="left" sideOffset={8}>
+                    {t('retrievePanel.insights.title', 'Insights')}
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            )}
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    type="button"
+                    onClick={() => { const html = buildExportHtml(messages, exportTheme); downloadHtml(html, `docforge-export-${exportTheme}.html`) }}
+                    className="w-full flex justify-center items-center py-2 rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
+                  >
+                    <DownloadIcon className="h-4 w-4" />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent side="left" sideOffset={8}>Export ({exportTheme})</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </nav>
+        )}
+
+        {/* Collapse toggle at bottom — mirrors AppSidebar */}
+        <div className="p-2 border-t border-border/30">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={() => setSidebarOpen(!sidebarOpen)}
+                  className={cn(
+                    'w-full flex items-center rounded-lg px-2 py-1.5 text-xs text-muted-foreground',
+                    'hover:bg-accent hover:text-foreground transition-colors',
+                    sidebarOpen ? 'justify-end gap-1' : 'justify-center'
+                  )}
+                >
+                  {sidebarOpen ? (
+                    <>
+                      <span>Collapse</span>
+                      <ChevronRightIcon className="h-3.5 w-3.5" />
+                    </>
+                  ) : (
+                    <ChevronLeftIcon className="h-3.5 w-3.5" />
+                  )}
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="left" sideOffset={8}>
+                {sidebarOpen ? 'Collapse panel' : 'Expand panel'}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
-      </div>}
+      </div>
     </div>
   )
 }
