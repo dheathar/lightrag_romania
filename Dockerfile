@@ -68,16 +68,15 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Install native libs required by docling's C++ extensions (docling-parse, opencv, etc.)
+# Install native libs required by docling's C++ extensions (docling-parse, etc.)
+# libGL is NOT needed here — opencv is replaced with headless variant below
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         libgomp1 \
         libglib2.0-0 \
-        libgl1-mesa-glx \
         libsm6 \
         libxext6 \
         libxrender1 \
-        libxcb1 \
     && rm -rf /var/lib/apt/lists/*
 
 # Install uv for package management
@@ -92,6 +91,11 @@ COPY --from=builder /app/lightrag ./lightrag
 COPY pyproject.toml .
 COPY setup.py .
 COPY uv.lock .
+
+# Replace full opencv-python with headless variant — eliminates libGL.so.1 dependency
+# Docling uses OpenCV only for image processing (no GUI/display needed in a server)
+RUN /app/.venv/bin/pip install --quiet --no-deps opencv-python-headless \
+    && /app/.venv/bin/pip uninstall --yes opencv-python 2>/dev/null || true
 
 # Ensure the installed scripts are on PATH
 ENV PATH=/app/.venv/bin:/root/.local/bin:$PATH
