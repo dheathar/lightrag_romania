@@ -124,11 +124,20 @@ export const ChatMessage = ({
     ? message.content
     : (displayContent !== undefined ? displayContent : (message.content || ''))
 
-  // Repair tables that arrive with blank lines between rows so remark-gfm renders them
-  const renderedDisplayContent = useMemo(
-    () => normalizeMarkdownTables(finalDisplayContent),
-    [finalDisplayContent]
-  )
+  // Repair tables that arrive with blank lines between rows so remark-gfm renders them,
+  // then turn inline [n] citation markers into links to the matching Sources card entry.
+  const renderedDisplayContent = useMemo(() => {
+    let md = normalizeMarkdownTables(finalDisplayContent)
+    const refCount = message.references?.length ?? 0
+    if (refCount > 0) {
+      // [n] (not a footnote [^n], not already a markdown link [n](...)) -> [n](#source-n)
+      md = md.replace(/\[(\d{1,3})\](?!\()/g, (m, n) => {
+        const idx = parseInt(n, 10)
+        return idx >= 1 && idx <= refCount ? `[${n}](#source-${n})` : m
+      })
+    }
+    return md
+  }, [finalDisplayContent, message.references])
 
   // Load KaTeX rehype plugin dynamically
   // Note: KaTeX extensions (mhchem, copy-tex) are imported statically in main.tsx
@@ -182,6 +191,36 @@ export const ChatMessage = ({
           {children}
         </CodeHighlight>
       );
+    },
+    a: ({ href, children }: { href?: string; children?: ReactNode }) => {
+      // Inline citation marker -> scrolls to the matching Sources card entry
+      if (href && href.startsWith('#source-')) {
+        const targetId = href.slice(1)
+        return (
+          <sup
+            role="button"
+            tabIndex={0}
+            title="Jump to source"
+            className="citation-marker cursor-pointer text-primary font-semibold mx-0.5 hover:underline"
+            onClick={(e) => {
+              e.preventDefault()
+              const el = document.getElementById(targetId)
+              if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+                el.classList.add('ring-2', 'ring-primary')
+                setTimeout(() => el.classList.remove('ring-2', 'ring-primary'), 1600)
+              }
+            }}
+          >
+            [{children}]
+          </sup>
+        )
+      }
+      return (
+        <a href={href} target="_blank" rel="noopener noreferrer" className="text-primary underline break-words">
+          {children}
+        </a>
+      )
     },
     p: ({ children }: { children?: ReactNode }) => <div className="my-2">{children}</div>,
     h1: ({ children }: { children?: ReactNode }) => <h1 className="text-xl font-bold mt-4 mb-2">{children}</h1>,
@@ -356,14 +395,15 @@ export const ChatMessage = ({
 
               const FileTypeIcon = ext === 'pdf' ? FileTextIcon : FileIcon
 
+              const refNum = ref.reference_id || String(idx + 1)
               return (
-                <div key={ref.reference_id || idx} className="rounded-xl border border-border/40 bg-muted/15 overflow-hidden text-xs">
+                <div key={ref.reference_id || idx} id={`source-${refNum}`} className="scroll-mt-4 rounded-xl border border-border/40 bg-muted/15 overflow-hidden text-xs transition-shadow">
 
                   {/* ── Header ── */}
                   <div className="flex items-start gap-2.5 px-3 py-2.5">
                     {/* Citation number */}
                     <span className="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full bg-primary/15 text-primary flex items-center justify-center font-bold text-[10px]">
-                      {idx + 1}
+                      {refNum}
                     </span>
 
                     <div className="flex-1 min-w-0">

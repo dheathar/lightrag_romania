@@ -237,9 +237,9 @@ Consider the conversation history if provided to maintain conversational flow an
   - Carefully determine the user's query intent in the context of the conversation history to fully understand the user's information need.
   - Scrutinize both `Knowledge Graph Data` and `Document Chunks` in the **Context**. Identify and extract all pieces of information that are directly relevant to answering the user query.
   - Weave the extracted facts into a coherent and logical response. Your own knowledge must ONLY be used to formulate fluent sentences and connect ideas, NOT to introduce any external information.
-  - Track the reference_id of the document chunk which directly support the facts presented in the response. Correlate reference_id with the entries in the `Reference Document List` to generate the appropriate citations.
-  - Generate a references section at the end of the response. Each reference document must directly support the facts presented in the response.
-  - Do not generate anything after the reference section.
+  - Track the reference_id of the document chunk that directly supports each fact, and cite it INLINE: place the marker [n] (where n is the reference_id from the `Reference Document List`) immediately after the sentence or clause it supports.
+  - When several sources support one statement, place the markers together, e.g. [1][3].
+  - Do NOT write a separate References or Sources section, and do not output anything after the answer — the application builds the source list automatically from the inline markers.
 
 2. Content & Grounding:
   - Base your answer on the provided **Context** which contains Knowledge Graph Data (entities and relationships) and Document Chunks.
@@ -255,21 +255,15 @@ Consider the conversation history if provided to maintain conversational flow an
   - The response MUST utilize Markdown formatting for enhanced clarity and structure (e.g., headings, bold text, bullet points).
   - The response should be presented in {response_type}.
 
-4. References Section Format:
-  - The References section should be under heading: `### References`
-  - Reference list entries should adhere to the format: `* [n] Document Title`. Do not include a caret (`^`) after opening square bracket (`[`).
-  - The Document Title in the citation must retain its original language.
-  - Output each citation on an individual line
-  - Provide maximum of 5 most relevant citations.
-  - Do not generate footnotes section or any comment, summary, or explanation after the references.
+4. Inline Citation Format:
+  - Use the format [n] — a number in square brackets, no caret — where n is the reference_id from the `Reference Document List`, e.g. [1].
+  - Place each marker immediately after the fact it supports; combine markers when needed, e.g. [2][4].
+  - Cite only sources that directly support the statement; avoid over-citing.
+  - Do NOT add a References, Sources, or footnotes section anywhere in the response.
 
-5. Reference Section Example:
+5. Inline Citation Example:
 ```
-### References
-
-- [1] Document Title One
-- [2] Document Title Two
-- [3] Document Title Three
+Excessive bureaucracy was a barrier shared across programmes [1][2]. Monitoring weaknesses were most pronounced in transport infrastructure [3].
 ```
 
 6. Additional Instructions (OVERRIDE — follow these with highest priority): {user_prompt}
@@ -296,9 +290,9 @@ Consider the conversation history if provided to maintain conversational flow an
   - Carefully determine the user's query intent in the context of the conversation history to fully understand the user's information need.
   - Scrutinize `Document Chunks` in the **Context**. Identify and extract all pieces of information that are directly relevant to answering the user query.
   - Weave the extracted facts into a coherent and logical response. Your own knowledge must ONLY be used to formulate fluent sentences and connect ideas, NOT to introduce any external information.
-  - Track the reference_id of the document chunk which directly support the facts presented in the response. Correlate reference_id with the entries in the `Reference Document List` to generate the appropriate citations.
-  - Generate a **References** section at the end of the response. Each reference document must directly support the facts presented in the response.
-  - Do not generate anything after the reference section.
+  - Track the reference_id of the document chunk that directly supports each fact, and cite it INLINE: place the marker [n] (where n is the reference_id from the `Reference Document List`) immediately after the sentence or clause it supports.
+  - When several sources support one statement, place the markers together, e.g. [1][3].
+  - Do NOT write a separate References or Sources section, and do not output anything after the answer — the application builds the source list automatically from the inline markers.
 
 2. Content & Grounding:
   - Base your answer on the provided **Context** which contains Document Chunks with relevant text.
@@ -311,21 +305,15 @@ Consider the conversation history if provided to maintain conversational flow an
   - The response MUST utilize Markdown formatting for enhanced clarity and structure (e.g., headings, bold text, bullet points).
   - The response should be presented in {response_type}.
 
-4. References Section Format:
-  - The References section should be under heading: `### References`
-  - Reference list entries should adhere to the format: `* [n] Document Title`. Do not include a caret (`^`) after opening square bracket (`[`).
-  - The Document Title in the citation must retain its original language.
-  - Output each citation on an individual line
-  - Provide maximum of 5 most relevant citations.
-  - Do not generate footnotes section or any comment, summary, or explanation after the references.
+4. Inline Citation Format:
+  - Use the format [n] — a number in square brackets, no caret — where n is the reference_id from the `Reference Document List`, e.g. [1].
+  - Place each marker immediately after the fact it supports; combine markers when needed, e.g. [2][4].
+  - Cite only sources that directly support the statement; avoid over-citing.
+  - Do NOT add a References, Sources, or footnotes section anywhere in the response.
 
-5. Reference Section Example:
+5. Inline Citation Example:
 ```
-### References
-
-- [1] Document Title One
-- [2] Document Title Two
-- [3] Document Title Three
+Excessive bureaucracy was a barrier shared across programmes [1][2]. Monitoring weaknesses were most pronounced in transport infrastructure [3].
 ```
 
 6. Additional Instructions (OVERRIDE — follow these with highest priority): {user_prompt}

@@ -1,6 +1,6 @@
 import { useState, memo } from 'react'
 import { KnowledgeInsights, KGEntity, KGRelationship, KGChunk } from '@/api/lightrag'
-import { BrainIcon, LoaderIcon, FileTextIcon } from 'lucide-react'
+import { BrainIcon, LoaderIcon, FileTextIcon, InfoIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useTranslation } from 'react-i18next'
 import ReactMarkdown from 'react-markdown'
@@ -41,9 +41,14 @@ const getTypeConfig = (type: string): ColorConfig => {
   return entityTypeConfig[upper] || entityTypeConfig['DEFAULT']
 }
 
-const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-  <div className="text-[9px] font-semibold uppercase tracking-widest text-muted-foreground mb-2">
-    {children}
+const SectionLabel = ({ children, info }: { children: React.ReactNode; info?: string }) => (
+  <div className="flex items-center gap-1 text-[9px] font-semibold uppercase tracking-widest text-muted-foreground mb-2">
+    <span>{children}</span>
+    {info && (
+      <span title={info} className="cursor-help">
+        <InfoIcon className="w-3 h-3 opacity-50 hover:opacity-100 transition-opacity" />
+      </span>
+    )}
   </div>
 )
 
@@ -186,7 +191,7 @@ export const KnowledgeInsightsPanel = memo(({ insights, isGeneratingReasoning }:
       {/* ENTITIES */}
       {hasEntities && (
         <div>
-          <SectionLabel>{t('retrievePanel.insights.entities', 'ENTITIES')}</SectionLabel>
+          <SectionLabel info={t('retrievePanel.insights.entitiesTooltip', 'Entities are the key things the system found in your documents — organisations, people, places, programmes, indicators, and concepts. They are the nodes of the knowledge map.')}>{t('retrievePanel.insights.entities', 'ENTITIES')}</SectionLabel>
           <div className="space-y-2">
             {insights.entities.slice(0, 10).map((entity, idx) => (
               <EntityCard key={`entity-${idx}`} entity={entity} />
@@ -198,7 +203,7 @@ export const KnowledgeInsightsPanel = memo(({ insights, isGeneratingReasoning }:
       {/* RELATIONSHIPS */}
       {hasRelationships && (
         <div>
-          <SectionLabel>{t('retrievePanel.insights.relations', 'RELATIONSHIPS')}</SectionLabel>
+          <SectionLabel info={t('retrievePanel.insights.relationsTooltip', 'Relationships are the connections between entities — how a programme relates to an authority, an indicator, or a finding. They are the links of the knowledge map.')}>{t('retrievePanel.insights.relations', 'RELATIONSHIPS')}</SectionLabel>
           <div className="space-y-2">
             {insights.relationships.slice(0, 10).map((rel, idx) => (
               <RelationshipCard key={`rel-${idx}`} relationship={rel} />
