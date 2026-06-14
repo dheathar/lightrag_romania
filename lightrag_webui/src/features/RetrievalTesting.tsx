@@ -1002,7 +1002,7 @@ export default function RetrievalTesting() {
 
       {/* Right panel — collapsible like AppSidebar */}
       <div className={cn(
-        'lumen-glass flex shrink-0 flex-col rounded-[20px] overflow-hidden transition-all duration-200',
+        'lumen-glass flex shrink-0 flex-col rounded-[20px] transition-all duration-200',
         sidebarOpen ? 'w-[300px]' : 'w-12'
       )}>
         {sidebarOpen ? (

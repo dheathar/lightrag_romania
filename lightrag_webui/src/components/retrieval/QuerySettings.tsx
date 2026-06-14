@@ -63,7 +63,7 @@ export default function QuerySettings() {
             <RotateCcw className="h-3 w-3 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200" />
           </button>
         </TooltipTrigger>
-        <TooltipContent side="top">
+        <TooltipContent side="left">
           <p>{title}</p>
         </TooltipContent>
       </Tooltip>
@@ -83,7 +83,7 @@ export default function QuerySettings() {
                       {t('retrievePanel.querySettings.userPrompt')}
                     </label>
                   </TooltipTrigger>
-                  <TooltipContent side="top">
+                  <TooltipContent side="left">
                     <p>{t('retrievePanel.querySettings.userPromptTooltip')}</p>
                   </TooltipContent>
                 </Tooltip>
@@ -111,7 +111,7 @@ export default function QuerySettings() {
                       {t('retrievePanel.querySettings.queryMode')}
                     </label>
                   </TooltipTrigger>
-                  <TooltipContent side="top">
+                  <TooltipContent side="left">
                     <p>{t('retrievePanel.querySettings.queryModeTooltip')}</p>
                   </TooltipContent>
                 </Tooltip>
@@ -154,7 +154,7 @@ export default function QuerySettings() {
                       {t('retrievePanel.querySettings.topK')}
                     </label>
                   </TooltipTrigger>
-                  <TooltipContent side="top">
+                  <TooltipContent side="left">
                     <p>{t('retrievePanel.querySettings.topKTooltip')}</p>
                   </TooltipContent>
                 </Tooltip>
@@ -194,7 +194,7 @@ export default function QuerySettings() {
                       {t('retrievePanel.querySettings.chunkTopK')}
                     </label>
                   </TooltipTrigger>
-                  <TooltipContent side="top">
+                  <TooltipContent side="left">
                     <p>{t('retrievePanel.querySettings.chunkTopKTooltip')}</p>
                   </TooltipContent>
                 </Tooltip>
@@ -234,7 +234,7 @@ export default function QuerySettings() {
                       {t('retrievePanel.querySettings.maxEntityTokens')}
                     </label>
                   </TooltipTrigger>
-                  <TooltipContent side="top">
+                  <TooltipContent side="left">
                     <p>{t('retrievePanel.querySettings.maxEntityTokensTooltip')}</p>
                   </TooltipContent>
                 </Tooltip>
@@ -274,7 +274,7 @@ export default function QuerySettings() {
                       {t('retrievePanel.querySettings.maxRelationTokens')}
                     </label>
                   </TooltipTrigger>
-                  <TooltipContent side="top">
+                  <TooltipContent side="left">
                     <p>{t('retrievePanel.querySettings.maxRelationTokensTooltip')}</p>
                   </TooltipContent>
                 </Tooltip>
@@ -314,7 +314,7 @@ export default function QuerySettings() {
                       {t('retrievePanel.querySettings.maxTotalTokens')}
                     </label>
                   </TooltipTrigger>
-                  <TooltipContent side="top">
+                  <TooltipContent side="left">
                     <p>{t('retrievePanel.querySettings.maxTotalTokensTooltip')}</p>
                   </TooltipContent>
                 </Tooltip>
@@ -355,7 +355,7 @@ export default function QuerySettings() {
                         {t('retrievePanel.querySettings.enableRerank')}
                       </label>
                     </TooltipTrigger>
-                    <TooltipContent side="top">
+                    <TooltipContent side="left">
                       <p>{t('retrievePanel.querySettings.enableRerankTooltip')}</p>
                     </TooltipContent>
                   </Tooltip>
@@ -376,7 +376,7 @@ export default function QuerySettings() {
                         {t('retrievePanel.querySettings.onlyNeedContext')}
                       </label>
                     </TooltipTrigger>
-                    <TooltipContent side="top">
+                    <TooltipContent side="left">
                       <p>{t('retrievePanel.querySettings.onlyNeedContextTooltip')}</p>
                     </TooltipContent>
                   </Tooltip>
@@ -402,7 +402,7 @@ export default function QuerySettings() {
                         {t('retrievePanel.querySettings.onlyNeedPrompt')}
                       </label>
                     </TooltipTrigger>
-                    <TooltipContent side="top">
+                    <TooltipContent side="left">
                       <p>{t('retrievePanel.querySettings.onlyNeedPromptTooltip')}</p>
                     </TooltipContent>
                   </Tooltip>
@@ -428,7 +428,7 @@ export default function QuerySettings() {
                         {t('retrievePanel.querySettings.streamResponse')}
                       </label>
                     </TooltipTrigger>
-                    <TooltipContent side="top">
+                    <TooltipContent side="left">
                       <p>{t('retrievePanel.querySettings.streamResponseTooltip')}</p>
                     </TooltipContent>
                   </Tooltip>
@@ -449,7 +449,7 @@ export default function QuerySettings() {
                         {t('retrievePanel.querySettings.includeChunkContent', 'Show Chunk Content')}
                       </label>
                     </TooltipTrigger>
-                    <TooltipContent side="top">
+                    <TooltipContent side="left">
                       <p>{t('retrievePanel.querySettings.includeChunkContentTooltip', 'Include actual chunk text content in citations for transparency')}</p>
                     </TooltipContent>
                   </Tooltip>
@@ -480,7 +480,7 @@ export default function QuerySettings() {
                         {t('retrievePanel.querySettings.historyTurns', 'Conversation Turns')}
                       </label>
                     </TooltipTrigger>
-                    <TooltipContent side="top">
+                    <TooltipContent side="left">
                       <p>{t('retrievePanel.querySettings.historyTurnsTooltip', 'Number of previous Q&A turns to include as context (0 = no memory, 3 = remember last 3 exchanges)')}</p>
                     </TooltipContent>
                   </Tooltip>
@@ -521,7 +521,7 @@ export default function QuerySettings() {
                         {t('retrievePanel.querySettings.enableKGInsights', 'Show KG Entities/Relations')}
                       </label>
                     </TooltipTrigger>
-                    <TooltipContent side="top">
+                    <TooltipContent side="left">
                       <p>{t('retrievePanel.querySettings.enableKGInsightsTooltip', 'Display extracted entities and relationships from the knowledge graph alongside each answer')}</p>
                     </TooltipContent>
                   </Tooltip>
@@ -543,7 +543,7 @@ export default function QuerySettings() {
                         {t('retrievePanel.querySettings.enableKGReasoning', 'AI Analysis')}
                       </label>
                     </TooltipTrigger>
-                    <TooltipContent side="top">
+                    <TooltipContent side="left">
                       <p>{t('retrievePanel.querySettings.enableKGReasoningTooltip', 'Use LLM to generate analytical insights about the retrieved entities and relationships')}</p>
                     </TooltipContent>
                   </Tooltip>
