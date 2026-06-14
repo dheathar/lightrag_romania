@@ -18,6 +18,31 @@ import { oneLight, oneDark } from 'react-syntax-highlighter/dist/cjs/styles/pris
 import { LoaderIcon, ChevronDownIcon, FileTextIcon, FileIcon, BookOpenIcon } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
+// Collapse blank lines that sit between Markdown table rows.
+// LLMs sometimes emit GFM tables with an empty line between every row; a blank
+// line breaks the table into separate paragraphs, so remark-gfm renders the raw
+// pipes as text instead of a table. Removing those interior blanks restores a
+// contiguous table block that remark-gfm parses correctly.
+const normalizeMarkdownTables = (md: string): string => {
+  if (!md || md.indexOf('|') === -1) return md
+  const isRow = (l: string) => /^\s*\|.*\|\s*$/.test(l)
+  const lines = md.split('\n')
+  const out: string[] = []
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].trim() === '') {
+      const prev = out.length ? out[out.length - 1] : ''
+      let j = i + 1
+      while (j < lines.length && lines[j].trim() === '') j++
+      const next = j < lines.length ? lines[j] : ''
+      if (isRow(prev) && isRow(next)) {
+        continue // drop blank line(s) between two table rows
+      }
+    }
+    out.push(lines[i])
+  }
+  return out.join('\n')
+}
+
 // KaTeX configuration options interface
 interface KaTeXOptions {
   errorColor?: string;
@@ -98,6 +123,12 @@ export const ChatMessage = ({
   const finalDisplayContent = message.role === 'user'
     ? message.content
     : (displayContent !== undefined ? displayContent : (message.content || ''))
+
+  // Repair tables that arrive with blank lines between rows so remark-gfm renders them
+  const renderedDisplayContent = useMemo(
+    () => normalizeMarkdownTables(finalDisplayContent),
+    [finalDisplayContent]
+  )
 
   // Load KaTeX rehype plugin dynamically
   // Note: KaTeX extensions (mhchem, copy-tex) are imported statically in main.tsx
@@ -298,7 +329,7 @@ export const ChatMessage = ({
             skipHtml={false}
             components={mainMarkdownComponents}
           >
-            {finalDisplayContent}
+            {renderedDisplayContent}
           </ReactMarkdown>
         </div>
       )}
