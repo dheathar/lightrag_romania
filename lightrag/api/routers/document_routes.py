@@ -1148,6 +1148,13 @@ def _convert_with_docling_enhanced(
                 f"Force-OCR enabled for {file_path.name} — "
                 f"bypassing PDF text layer, using full-page OCR"
             )
+        else:
+            # Standard (Tier 1) pass: skip per-page OCR entirely. These are digital
+            # PDFs with a real text layer, so OCR is pure overhead (RapidOCR on CPU
+            # runs on every page and dominates extraction time). If the text layer
+            # turns out garbled, the caller escalates to Tier 2 (force_ocr=True),
+            # which re-enables full-page OCR via OcrAutoOptions above.
+            pipeline_options.do_ocr = False
 
         format_options[InputFormat.PDF] = PdfFormatOption(
             pipeline_options=pipeline_options
