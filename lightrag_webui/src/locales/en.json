@@ -414,7 +414,7 @@
       "startPrompt": "Type your question below to search your documents",
       "clear": "Clear chat",
       "send": "Send",
-      "placeholder": "Ask a question about your documents...",
+      "placeholder": "Ask a question…  (tip: start with /global, /hybrid, /local, /mix or /naive to choose a search mode)",
       "error": "Something went wrong — please try again",
       "queryModeError": "Supported search methods: {{modes}}",
       "queryModePrefixInvalid": "Invalid prefix. Use: /<method> [space] your question"
@@ -423,14 +423,14 @@
       "parametersTitle": "Search Settings",
       "parametersDescription": "Adjust how your questions are answered",
       "queryMode": "Search Method",
-      "queryModeTooltip": "Choose how DocLens searches your documents:\n• Basic Search: Fast text matching across passages\n• Focused Search: Finds specific people, organisations and topics\n• Big Picture: Looks for themes and broad patterns\n• Balanced: Combines focused and broad search\n• Full Search: Uses all available methods (recommended)\n• Direct to AI: Skips document search — asks the AI directly",
+      "queryModeTooltip": "Choose how the system searches your documents:\n• Naive: fast direct text search, no knowledge graph\n• Local: specific entities — programmes, indicators, institutions\n• Global: broad themes and patterns across the whole corpus\n• Hybrid: combines Local and Global\n• Mix: all methods together (recommended)\n• Bypass: skips document search — asks the AI directly\n\nTip: type a prefix in your question, e.g. /global your question",
       "queryModeOptions": {
-        "naive": "Basic Search",
-        "local": "Focused Search",
-        "global": "Big Picture",
-        "hybrid": "Balanced",
-        "mix": "Full Search",
-        "bypass": "Direct to AI"
+        "naive": "Naive",
+        "local": "Local",
+        "global": "Global",
+        "hybrid": "Hybrid",
+        "mix": "Mix",
+        "bypass": "Bypass"
       },
       "responseFormat": "Answer Format",
       "responseFormatTooltip": "Choose how the answer is structured:\n• Multiple paragraphs: detailed, flowing text\n• Single paragraph: concise summary\n• Bullet points: easy-to-scan list",

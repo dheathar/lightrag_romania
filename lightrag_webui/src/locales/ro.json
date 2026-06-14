@@ -414,7 +414,7 @@
       "startPrompt": "Introduceți întrebarea mai jos pentru a căuta în documentele dvs.",
       "clear": "Șterge conversația",
       "send": "Trimite",
-      "placeholder": "Adresați o întrebare despre documentele dvs...",
+      "placeholder": "Adresați o întrebare…  (sfat: începeți cu /global, /hybrid, /local, /mix sau /naive pentru a alege metoda de căutare)",
       "error": "Ceva nu a mers bine — vă rugăm încercați din nou",
       "queryModeError": "Metode de căutare acceptate: {{modes}}",
       "queryModePrefixInvalid": "Prefix invalid. Utilizați: /<metodă> [spațiu] întrebarea dvs."
@@ -423,14 +423,14 @@
       "parametersTitle": "Setări Căutare",
       "parametersDescription": "Ajustați modul în care se răspunde la întrebările dvs.",
       "queryMode": "Metodă de Căutare",
-      "queryModeTooltip": "Alegeți cum caută DocLens în documentele dvs.:\n• Căutare de bază: potrivire rapidă de text în pasaje\n• Căutare focalizată: găsește persoane, organizații și subiecte specifice\n• Imagine de ansamblu: caută teme și tipare generale\n• Echilibrată: combină căutarea focalizată și cea generală\n• Căutare completă: folosește toate metodele disponibile (recomandat)\n• Direct la AI: omite documentele — întreabă AI direct",
+      "queryModeTooltip": "Alegeți cum caută sistemul în documentele dvs.:\n• Naive: căutare directă de text, fără graf de cunoștințe\n• Local: entități specifice — programe, indicatori, instituții\n• Global: teme și tipare generale în tot corpusul\n• Hybrid: combină Local și Global\n• Mix: toate metodele împreună (recomandat)\n• Bypass: omite documentele — întreabă AI direct\n\nSfat: tastați un prefix în întrebare, ex. /global întrebarea dvs.",
       "queryModeOptions": {
-        "naive": "Căutare de Bază",
-        "local": "Căutare Focalizată",
-        "global": "Imagine de Ansamblu",
-        "hybrid": "Echilibrată",
-        "mix": "Căutare Completă",
-        "bypass": "Direct la AI"
+        "naive": "Naive",
+        "local": "Local",
+        "global": "Global",
+        "hybrid": "Hybrid",
+        "mix": "Mix",
+        "bypass": "Bypass"
       },
       "responseFormat": "Format Răspuns",
       "responseFormatTooltip": "Alegeți cum este structurat răspunsul:\n• Paragrafe multiple: text detaliat, fluid\n• Paragraf unic: rezumat concis\n• Puncte marcatoare: listă ușor de parcurs",
