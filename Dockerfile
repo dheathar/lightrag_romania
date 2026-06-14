@@ -68,11 +68,15 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Install native libs required by docling's C++ extensions
-# libgl1 WITHOUT --no-install-recommends so apt pulls in libglx-mesa0 (the Mesa
-# implementation that actually provides libGL.so.1 — slim images skip it otherwise)
+# Non-interactive apt in this stage too (slim base does not inherit it from builder)
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install native libs required by docling's C++ extensions.
+# libgl1 (GLVND) ships libGL.so.1 directly — no need to pull recommends.
+# Keep --no-install-recommends so apt never hits an interactive prompt that
+# would fail the build in this stage.
 RUN apt-get update \
-    && apt-get install -y \
+    && apt-get install -y --no-install-recommends \
         libgomp1 \
         libglib2.0-0 \
         libgl1 \
