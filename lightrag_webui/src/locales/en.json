@@ -705,12 +705,30 @@
     "customPromptTitle": "Extra Instruction Examples",
     "customPromptDesc": "The 'Extra Instructions' field in Search Settings adds a standing instruction to every answer. Here are some useful examples:",
     "customPrompts": [
-      { "label": "Answer in Romanian", "value": "Answer in Romanian." },
-      { "label": "Keep it short", "value": "Keep the answer under 150 words. No bullet points." },
-      { "label": "Expert tone", "value": "Answer as a senior EU structural funds evaluator with formal, technical language." },
-      { "label": "Include numbers", "value": "Always include specific figures and percentages when available." },
-      { "label": "Cite sources inline", "value": "Cite the source document after each claim, e.g. (POCU Report, p.12)." },
-      { "label": "End with a summary", "value": "End every answer with a one-sentence summary in bold." }
+      {
+        "label": "Answer in Romanian",
+        "value": "Answer in Romanian."
+      },
+      {
+        "label": "Keep it short",
+        "value": "Keep the answer under 150 words. No bullet points."
+      },
+      {
+        "label": "Expert tone",
+        "value": "Answer as a senior EU structural funds evaluator with formal, technical language."
+      },
+      {
+        "label": "Include numbers",
+        "value": "Always include specific figures and percentages when available."
+      },
+      {
+        "label": "Cite sources inline",
+        "value": "Cite the source document after each claim, e.g. (POCU Report, p.12)."
+      },
+      {
+        "label": "End with a summary",
+        "value": "End every answer with a one-sentence summary in bold."
+      }
     ],
     "tabGuideTitle": "Navigation Guide",
     "tabs": {
@@ -723,5 +741,13 @@
       "settings": "View the server configuration: AI models, storage, and ranking settings."
     },
     "version": "Version"
+  },
+  "sidebar": {
+    "knowledgePipeline": "Knowledge Pipeline",
+    "queryTest": "Query & Test",
+    "quality": "Quality",
+    "configuration": "Configuration",
+    "collapse": "Collapse sidebar",
+    "expand": "Expand sidebar"
   }
 }

@@ -705,12 +705,30 @@
     "customPromptTitle": "Exemple Instrucțiuni Suplimentare",
     "customPromptDesc": "Câmpul 'Instrucțiuni Suplimentare' din Setări Căutare adaugă o instrucțiune permanentă la fiecare răspuns. Iată câteva exemple utile:",
     "customPrompts": [
-      { "label": "Răspunde în română", "value": "Răspunde în română." },
-      { "label": "Fii concis", "value": "Păstrează răspunsul sub 150 de cuvinte. Fără puncte marcatoare." },
-      { "label": "Ton expert", "value": "Răspunde ca un evaluator senior de fonduri structurale UE, cu limbaj formal și tehnic." },
-      { "label": "Include cifre", "value": "Include întotdeauna cifre și procente specifice când sunt disponibile." },
-      { "label": "Citează sursele", "value": "Citează documentul sursă după fiecare afirmație, ex. (Raport POCU, p.12)." },
-      { "label": "Încheie cu un rezumat", "value": "Încheie fiecare răspuns cu un rezumat dintr-o singură propoziție scrisă cu bold." }
+      {
+        "label": "Răspunde în română",
+        "value": "Răspunde în română."
+      },
+      {
+        "label": "Fii concis",
+        "value": "Păstrează răspunsul sub 150 de cuvinte. Fără puncte marcatoare."
+      },
+      {
+        "label": "Ton expert",
+        "value": "Răspunde ca un evaluator senior de fonduri structurale UE, cu limbaj formal și tehnic."
+      },
+      {
+        "label": "Include cifre",
+        "value": "Include întotdeauna cifre și procente specifice când sunt disponibile."
+      },
+      {
+        "label": "Citează sursele",
+        "value": "Citează documentul sursă după fiecare afirmație, ex. (Raport POCU, p.12)."
+      },
+      {
+        "label": "Încheie cu un rezumat",
+        "value": "Încheie fiecare răspuns cu un rezumat dintr-o singură propoziție scrisă cu bold."
+      }
     ],
     "tabGuideTitle": "Ghid de Navigare",
     "tabs": {
@@ -723,5 +741,13 @@
       "settings": "Vizualizați configurația serverului: modele AI, stocare și setări de clasament."
     },
     "version": "Versiune"
+  },
+  "sidebar": {
+    "knowledgePipeline": "Pipeline Cunoștințe",
+    "queryTest": "Interogare & Test",
+    "quality": "Calitate",
+    "configuration": "Configurare",
+    "collapse": "Restrânge bara laterală",
+    "expand": "Extinde bara laterală"
   }
 }
