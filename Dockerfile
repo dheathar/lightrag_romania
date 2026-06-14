@@ -68,6 +68,17 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
+# Install native libs required by docling's C++ extensions (docling-parse, torch, etc.)
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        libgomp1 \
+        libglib2.0-0 \
+        libgl1 \
+        libsm6 \
+        libxext6 \
+        libxrender1 \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install uv for package management
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
