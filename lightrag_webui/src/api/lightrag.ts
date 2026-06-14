@@ -1011,6 +1011,10 @@ export const queryTextStream = async (
             } else if (parsed.error && onError) {
               onError(parsed.error);
             }
+            // References arrive in their own leading chunk: {"references":[...]}
+            if (parsed.references && onReferences) {
+              onReferences(parsed.references);
+            }
           } catch (error) {
             console.error('Error parsing stream chunk:', line, error);
             if (onError) onError(`Error parsing server response: ${line}`);
@@ -1027,6 +1031,9 @@ export const queryTextStream = async (
           onChunk(parsed.response);
         } else if (parsed.error && onError) {
           onError(parsed.error);
+        }
+        if (parsed.references && onReferences) {
+          onReferences(parsed.references);
         }
       } catch (error) {
         console.error('Error parsing final chunk:', buffer, error);
