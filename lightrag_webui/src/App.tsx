@@ -175,7 +175,7 @@ function App() {
             <div className="flex flex-col flex-1 overflow-hidden">
               <header className="border-border/40 bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 flex h-10 w-full border-b px-4 backdrop-blur">
                 <a href={webuiPrefix} className="flex items-center gap-2">
-                  <img src="logo.png" alt="DocForge" className="size-7" />
+                  <img src="logo.png" alt="DocLens" className="size-7" />
                 </a>
               </header>
               <div className="flex flex-1 items-center justify-center">

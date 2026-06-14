@@ -269,7 +269,7 @@ function mdToHtml(text: string): string {
 export function buildExportHtml(
   messages: MessageWithError[],
   theme: 'light' | 'dark',
-  title = 'DocForge — Conversation Export'
+  title = 'DocLens — Conversation Export'
 ): string {
   const css = theme === 'dark' ? DARK_CSS : LIGHT_CSS
 

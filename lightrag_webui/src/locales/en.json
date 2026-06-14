@@ -206,7 +206,7 @@
   "graphPanel": {
     "dataIsTruncated": "Only showing the first N connections — zoom in on a topic to see more",
     "statusDialog": {
-      "title": "DocForge System Status",
+      "title": "DocLens System Status",
       "description": "View current system status and connection details"
     },
     "legend": "Legend",
@@ -423,7 +423,7 @@
       "parametersTitle": "Search Settings",
       "parametersDescription": "Adjust how your questions are answered",
       "queryMode": "Search Method",
-      "queryModeTooltip": "Choose how DocForge searches your documents:\n• Basic Search: Fast text matching across passages\n• Focused Search: Finds specific people, organisations and topics\n• Big Picture: Looks for themes and broad patterns\n• Balanced: Combines focused and broad search\n• Full Search: Uses all available methods (recommended)\n• Direct to AI: Skips document search — asks the AI directly",
+      "queryModeTooltip": "Choose how DocLens searches your documents:\n• Basic Search: Fast text matching across passages\n• Focused Search: Finds specific people, organisations and topics\n• Big Picture: Looks for themes and broad patterns\n• Balanced: Combines focused and broad search\n• Full Search: Uses all available methods (recommended)\n• Direct to AI: Skips document search — asks the AI directly",
       "queryModeOptions": {
         "naive": "Basic Search",
         "local": "Focused Search",
@@ -487,7 +487,7 @@
   },
   "settingsPanel": {
     "title": "System Info",
-    "description": "View the current DocForge server configuration",
+    "description": "View the current DocLens server configuration",
     "refresh": "Refresh",
     "loading": "Loading...",
     "editNote": "These settings are configured by your system administrator via environment variables. Restart the server after making changes.",
@@ -609,7 +609,7 @@
   },
   "evaluationPanel": {
     "title": "Answer Quality Check",
-    "description": "Test how accurately and relevantly DocForge answers questions from your documents",
+    "description": "Test how accurately and relevantly DocLens answers questions from your documents",
     "refresh": "Refresh",
     "loading": "Loading results...",
     "loadError": "Could not load evaluation results",
@@ -639,7 +639,7 @@
     "delete": "Delete",
     "confirmDelete": "Are you sure you want to delete this result?",
     "noResults": "No Quality Checks Yet",
-    "noResultsDescription": "Run a quality check to see how well DocForge answers questions from your documents.",
+    "noResultsDescription": "Run a quality check to see how well DocLens answers questions from your documents.",
     "runFirstEvaluation": "Run First Quality Check",
     "evaluationDetails": "Quality Check Details",
     "faithfulness": "Accuracy",
@@ -659,10 +659,10 @@
   },
   "about": {
     "button": "About",
-    "title": "About DocForge",
+    "title": "About DocLens",
     "subtitle": "Intelligent document analysis — ask questions, get cited answers",
-    "description": "DocForge reads your documents (PDF, DOCX, PPTX, XLSX, HTML, Markdown, and more) and builds a searchable knowledge base. Using AI with visual understanding, it extracts text, tables, charts, and figures — even from scanned documents. It maps topics and their connections so you can ask questions in plain language and receive accurate answers that cite the original source.",
-    "featuresTitle": "What DocForge Can Do",
+    "description": "DocLens reads your documents (PDF, DOCX, PPTX, XLSX, HTML, Markdown, and more) and builds a searchable knowledge base. Using AI with visual understanding, it extracts text, tables, charts, and figures — even from scanned documents. It maps topics and their connections so you can ask questions in plain language and receive accurate answers that cite the original source.",
+    "featuresTitle": "What DocLens Can Do",
     "features": {
       "multimodal": "Read Documents of All Kinds",
       "multimodalDesc": "Extracts content from PDFs, Word, PowerPoint, Excel, and plain text — including tables, figures, and equations from scanned or complex documents.",
@@ -673,11 +673,11 @@
       "hybridRetrieval": "Multiple Search Strategies",
       "hybridRetrievalDesc": "Searches your documents using several methods simultaneously — direct text matching, topic-based search, and relationship traversal — for the most accurate answers.",
       "evaluation": "Answer Quality Testing",
-      "evaluationDesc": "Run automated tests to measure how accurate, relevant, and complete DocForge's answers are."
+      "evaluationDesc": "Run automated tests to measure how accurate, relevant, and complete DocLens's answers are."
     },
     "taxonomy": {
       "title": "Topic Types",
-      "description": "DocForge recognises specific types of topics in your documents. This list is configured for your domain — it tells the AI which concepts to look for when building the knowledge map.",
+      "description": "DocLens recognises specific types of topics in your documents. This list is configured for your domain — it tells the AI which concepts to look for when building the knowledge map.",
       "defaultTitle": "Active Topic Types (15 EU/Romania-specific)",
       "defaultDesc": "This installation is configured for EU structural fund evaluation reports and Romanian policy documents.",
       "domainTitle": "EU Cohesion Policy Topic Types (16 domain-specific)",
@@ -736,8 +736,8 @@
       "docProcessing": "Configure how documents are read, how images are described, and how text is divided into searchable passages.",
       "knowledgeGraph": "Explore the interactive map of topics and connections extracted from your documents.",
       "retrieval": "Ask questions in plain language and get answers with citations from your documents.",
-      "evaluation": "Run automated quality checks to measure how accurately DocForge answers your test questions.",
-      "api": "Technical API documentation for developers who need programmatic access to DocForge.",
+      "evaluation": "Run automated quality checks to measure how accurately DocLens answers your test questions.",
+      "api": "Technical API documentation for developers who need programmatic access to DocLens.",
       "settings": "View the server configuration: AI models, storage, and ranking settings."
     },
     "version": "Version"

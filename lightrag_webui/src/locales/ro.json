@@ -206,7 +206,7 @@
   "graphPanel": {
     "dataIsTruncated": "Se afișează doar primele N conexiuni — explorați un subiect pentru mai multe detalii",
     "statusDialog": {
-      "title": "Stare Sistem DocForge",
+      "title": "Stare Sistem DocLens",
       "description": "Vizualizați starea curentă a sistemului și detaliile de conexiune"
     },
     "legend": "Legendă",
@@ -423,7 +423,7 @@
       "parametersTitle": "Setări Căutare",
       "parametersDescription": "Ajustați modul în care se răspunde la întrebările dvs.",
       "queryMode": "Metodă de Căutare",
-      "queryModeTooltip": "Alegeți cum caută DocForge în documentele dvs.:\n• Căutare de bază: potrivire rapidă de text în pasaje\n• Căutare focalizată: găsește persoane, organizații și subiecte specifice\n• Imagine de ansamblu: caută teme și tipare generale\n• Echilibrată: combină căutarea focalizată și cea generală\n• Căutare completă: folosește toate metodele disponibile (recomandat)\n• Direct la AI: omite documentele — întreabă AI direct",
+      "queryModeTooltip": "Alegeți cum caută DocLens în documentele dvs.:\n• Căutare de bază: potrivire rapidă de text în pasaje\n• Căutare focalizată: găsește persoane, organizații și subiecte specifice\n• Imagine de ansamblu: caută teme și tipare generale\n• Echilibrată: combină căutarea focalizată și cea generală\n• Căutare completă: folosește toate metodele disponibile (recomandat)\n• Direct la AI: omite documentele — întreabă AI direct",
       "queryModeOptions": {
         "naive": "Căutare de Bază",
         "local": "Căutare Focalizată",
@@ -487,7 +487,7 @@
   },
   "settingsPanel": {
     "title": "Informații Sistem",
-    "description": "Vizualizați configurația curentă a serverului DocForge",
+    "description": "Vizualizați configurația curentă a serverului DocLens",
     "refresh": "Reîmprospătare",
     "loading": "Se încarcă...",
     "editNote": "Aceste setări sunt configurate de administratorul sistemului prin variabile de mediu. Reporniți serverul după efectuarea modificărilor.",
@@ -609,7 +609,7 @@
   },
   "evaluationPanel": {
     "title": "Verificare Calitate Răspunsuri",
-    "description": "Testați cât de precis și relevant răspunde DocForge la întrebările din documentele dvs.",
+    "description": "Testați cât de precis și relevant răspunde DocLens la întrebările din documentele dvs.",
     "refresh": "Reîmprospătare",
     "loading": "Se încarcă rezultatele...",
     "loadError": "Nu s-au putut încărca rezultatele evaluării",
@@ -639,7 +639,7 @@
     "delete": "Ștergere",
     "confirmDelete": "Sigur doriți să ștergeți acest rezultat?",
     "noResults": "Nicio Verificare Încă",
-    "noResultsDescription": "Rulați o verificare de calitate pentru a vedea cât de bine răspunde DocForge la întrebările din documentele dvs.",
+    "noResultsDescription": "Rulați o verificare de calitate pentru a vedea cât de bine răspunde DocLens la întrebările din documentele dvs.",
     "runFirstEvaluation": "Rulare Primă Verificare",
     "evaluationDetails": "Detalii Verificare Calitate",
     "faithfulness": "Acuratețe",
@@ -659,10 +659,10 @@
   },
   "about": {
     "button": "Despre",
-    "title": "Despre DocForge",
+    "title": "Despre DocLens",
     "subtitle": "Analiză inteligentă de documente — puneți întrebări, primiți răspunsuri cu surse",
-    "description": "DocForge vă citește documentele (PDF, DOCX, PPTX, XLSX, HTML, Markdown și altele) și construiește o bază de cunoștințe căutabilă. Folosind AI cu înțelegere vizuală, extrage text, tabele, grafice și figuri — chiar și din documente scanate. Cartografiază subiectele și conexiunile dintre ele, astfel încât să puteți pune întrebări în limbaj natural și să primiți răspunsuri precise care citează sursa originală.",
-    "featuresTitle": "Ce Poate Face DocForge",
+    "description": "DocLens vă citește documentele (PDF, DOCX, PPTX, XLSX, HTML, Markdown și altele) și construiește o bază de cunoștințe căutabilă. Folosind AI cu înțelegere vizuală, extrage text, tabele, grafice și figuri — chiar și din documente scanate. Cartografiază subiectele și conexiunile dintre ele, astfel încât să puteți pune întrebări în limbaj natural și să primiți răspunsuri precise care citează sursa originală.",
+    "featuresTitle": "Ce Poate Face DocLens",
     "features": {
       "multimodal": "Citire Documente de Toate Tipurile",
       "multimodalDesc": "Extrage conținut din PDF, Word, PowerPoint, Excel și text simplu — inclusiv tabele, figuri și ecuații din documente complexe sau scanate.",
@@ -673,11 +673,11 @@
       "hybridRetrieval": "Strategii Multiple de Căutare",
       "hybridRetrievalDesc": "Caută în documentele dvs. folosind mai multe metode simultan — potrivire directă de text, căutare bazată pe subiecte și explorare conexiuni — pentru răspunsurile cele mai precise.",
       "evaluation": "Testare Calitate Răspunsuri",
-      "evaluationDesc": "Rulați teste automate pentru a măsura cât de precise, relevante și complete sunt răspunsurile DocForge."
+      "evaluationDesc": "Rulați teste automate pentru a măsura cât de precise, relevante și complete sunt răspunsurile DocLens."
     },
     "taxonomy": {
       "title": "Tipuri de Subiecte",
-      "description": "DocForge recunoaște tipuri specifice de subiecte în documentele dvs. Această listă este configurată pentru domeniul dvs. — indică AI-ului ce concepte să caute la construirea hărții de cunoștințe.",
+      "description": "DocLens recunoaște tipuri specifice de subiecte în documentele dvs. Această listă este configurată pentru domeniul dvs. — indică AI-ului ce concepte să caute la construirea hărții de cunoștințe.",
       "defaultTitle": "Tipuri de Subiecte Active (15 specifice UE/România)",
       "defaultDesc": "Această instalare este configurată pentru rapoarte de evaluare a fondurilor structurale UE și documente de politici românești.",
       "domainTitle": "Tipuri Subiecte Politică de Coeziune UE (16 specifice domeniului)",
@@ -736,8 +736,8 @@
       "docProcessing": "Configurați cum sunt citite documentele, cum sunt descrise imaginile și cum este împărțit textul în pasaje căutabile.",
       "knowledgeGraph": "Explorați harta interactivă de subiecte și conexiuni extrase din documentele dvs.",
       "retrieval": "Puneți întrebări în limbaj natural și primiți răspunsuri cu citări din documentele dvs.",
-      "evaluation": "Rulați verificări automate de calitate pentru a măsura cât de precis răspunde DocForge la întrebările dvs.",
-      "api": "Documentație tehnică API pentru dezvoltatorii care au nevoie de acces programatic la DocForge.",
+      "evaluation": "Rulați verificări automate de calitate pentru a măsura cât de precis răspunde DocLens la întrebările dvs.",
+      "api": "Documentație tehnică API pentru dezvoltatorii care au nevoie de acces programatic la DocLens.",
       "settings": "Vizualizați configurația serverului: modele AI, stocare și setări de clasament."
     },
     "version": "Versiune"

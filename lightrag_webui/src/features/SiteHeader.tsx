@@ -30,7 +30,7 @@ export default function SiteHeader() {
       {/* Logo + title */}
       <div className="flex items-center gap-2 flex-1 min-w-0">
         <a href={webuiPrefix} className="flex items-center gap-2 flex-shrink-0">
-          <img src="logo.png" alt="DocForge" className="size-7" />
+          <img src="logo.png" alt="DocLens" className="size-7" />
           <span className="font-bold">{SiteInfo.name}</span>
         </a>
         {webuiTitle && (

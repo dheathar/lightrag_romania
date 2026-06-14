@@ -86,7 +86,7 @@ export const supportedFileTypes = {
 }
 
 export const SiteInfo = {
-  name: 'DocForge',
+  name: 'DocLens',
   home: '/',
   github: 'https://github.com/HKUDS/LightRAG'
 }

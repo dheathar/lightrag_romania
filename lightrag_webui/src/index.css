@@ -9,7 +9,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================================
-   LUMEN — Soft Glass theme for DocForge
+   LUMEN — Soft Glass theme for DocLens
    World Bank navy-blue palette + translucent depth.
    navyblue  RGB(26,54,93)   → hsl(213 56% 23%)
    accentblue RGB(41,98,172) → hsl(213 61% 42%)

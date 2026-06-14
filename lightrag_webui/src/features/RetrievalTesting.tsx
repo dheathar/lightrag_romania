@@ -1055,7 +1055,7 @@ export default function RetrievalTesting() {
                     <TooltipTrigger asChild>
                       <button
                         type="button"
-                        onClick={() => { const html = buildExportHtml(messages, exportTheme); downloadHtml(html, `docforge-export-${exportTheme}.html`) }}
+                        onClick={() => { const html = buildExportHtml(messages, exportTheme); downloadHtml(html, `doclens-export-${exportTheme}.html`) }}
                         className="ml-1 p-1 rounded text-muted-foreground hover:text-foreground transition-colors"
                       >
                         <DownloadIcon className="w-3.5 h-3.5" />
@@ -1128,7 +1128,7 @@ export default function RetrievalTesting() {
                 <TooltipTrigger asChild>
                   <button
                     type="button"
-                    onClick={() => { const html = buildExportHtml(messages, exportTheme); downloadHtml(html, `docforge-export-${exportTheme}.html`) }}
+                    onClick={() => { const html = buildExportHtml(messages, exportTheme); downloadHtml(html, `doclens-export-${exportTheme}.html`) }}
                     className="w-full flex justify-center items-center py-2 rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
                   >
                     <DownloadIcon className="h-4 w-4" />
