@@ -168,15 +168,102 @@ function esc(s: string): string {
     .replace(/"/g, '&quot;')
 }
 
+function inlineMd(raw: string): string {
+  // Protect inline code from further processing
+  const codeSlots: string[] = []
+  let s = raw.replace(/`([^`]+)`/g, (_, code) => {
+    const i = codeSlots.length
+    codeSlots.push(`<code>${esc(code)}</code>`)
+    return `\x00${i}\x00`
+  })
+  // Escape HTML in non-code text
+  s = esc(s)
+  // Bold-italic, bold, italic
+  s = s.replace(/\*\*\*([^*\n]+?)\*\*\*/g, '<strong><em>$1</em></strong>')
+  s = s.replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>')
+  s = s.replace(/\*([^*\n]+?)\*/g, '<em>$1</em>')
+  s = s.replace(/_([^_\n]+?)_/g, '<em>$1</em>')
+  // Restore code slots
+  s = s.replace(/\x00(\d+)\x00/g, (_, i) => codeSlots[parseInt(i)])
+  return s
+}
+
 function mdToHtml(text: string): string {
-  // Minimal Markdown → HTML: preserve line breaks as paragraphs
-  return text
-    .split(/\n\n+/)
-    .map((para) => {
-      const lines = para.split('\n').map((l) => esc(l)).join('<br>')
-      return `<p>${lines}</p>`
-    })
-    .join('\n')
+  const lines = text.split('\n')
+  const out: string[] = []
+  let inUl = false
+  let inOl = false
+  let inCode = false
+  const codeLines: string[] = []
+
+  const flushLists = () => {
+    if (inUl) { out.push('</ul>'); inUl = false }
+    if (inOl) { out.push('</ol>'); inOl = false }
+  }
+
+  for (const line of lines) {
+    // Fenced code block
+    if (/^```/.test(line)) {
+      if (inCode) {
+        out.push(`<pre><code>${esc(codeLines.join('\n'))}</code></pre>`)
+        codeLines.length = 0
+        inCode = false
+      } else {
+        flushLists()
+        inCode = true
+      }
+      continue
+    }
+    if (inCode) { codeLines.push(line); continue }
+
+    // Headings
+    const hm = line.match(/^(#{1,6})\s+(.+)$/)
+    if (hm) {
+      flushLists()
+      const lvl = hm[1].length
+      out.push(`<h${lvl}>${inlineMd(hm[2])}</h${lvl}>`)
+      continue
+    }
+
+    // Unordered list item
+    const ulm = line.match(/^[-*+]\s+(.+)$/)
+    if (ulm) {
+      if (!inUl) { if (inOl) { out.push('</ol>'); inOl = false } out.push('<ul>'); inUl = true }
+      out.push(`<li>${inlineMd(ulm[1])}</li>`)
+      continue
+    }
+
+    // Ordered list item
+    const olm = line.match(/^\d+\.\s+(.+)$/)
+    if (olm) {
+      if (!inOl) { if (inUl) { out.push('</ul>'); inUl = false } out.push('<ol>'); inOl = true }
+      out.push(`<li>${inlineMd(olm[1])}</li>`)
+      continue
+    }
+
+    // Horizontal rule
+    if (/^---+$/.test(line.trim())) {
+      flushLists()
+      out.push('<hr>')
+      continue
+    }
+
+    // Empty line — close open lists, add spacing
+    if (line.trim() === '') {
+      flushLists()
+      out.push('')
+      continue
+    }
+
+    // Normal paragraph line
+    flushLists()
+    out.push(`<p>${inlineMd(line)}</p>`)
+  }
+
+  flushLists()
+  if (inCode) out.push(`<pre><code>${esc(codeLines.join('\n'))}</code></pre>`)
+
+  return out.join('\n')
 }
 
 export function buildExportHtml(
