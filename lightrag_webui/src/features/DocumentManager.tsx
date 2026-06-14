@@ -282,6 +282,21 @@ const pulseStyle = `
 type SortField = 'created_at' | 'updated_at' | 'id' | 'file_path';
 type SortDirection = 'asc' | 'desc';
 
+// ── Content-summary cleaner ─────────────────────────────────────────
+// The stored content_summary is the raw start of the extracted markdown, which
+// includes docling artifacts (<!-- image -->), heading markers, table pipes and
+// image syntax. Strip those so the row shows a clean, human-readable preview.
+function cleanSummary(raw?: string): string {
+  if (!raw) return ''
+  return raw
+    .replace(/<!--[\s\S]*?-->/g, ' ')      // HTML comments e.g. <!-- image -->
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')  // markdown images ![alt](src)
+    .replace(/^#{1,6}\s*/gm, '')            // heading markers ## ###
+    .replace(/[*_`>|#]+/g, ' ')             // stray markdown / table symbols
+    .replace(/\s+/g, ' ')                    // collapse whitespace/newlines
+    .trim()
+}
+
 // ── Relative time helper ────────────────────────────────────────────
 function formatRelTime(dateStr: string): string {
   const diff = Date.now() - new Date(dateStr).getTime()
@@ -370,13 +385,15 @@ function DocumentRow({ doc, selected, onSelect, showFileName, t }: DocumentRowPr
           {doc.chunks_count != null && (
             <span>{doc.chunks_count} chunks</span>
           )}
-          {doc.content_summary && (
-            <span className="truncate italic">
-              {doc.content_summary.length > 70
-                ? doc.content_summary.slice(0, 70) + '…'
-                : doc.content_summary}
-            </span>
-          )}
+          {(() => {
+            const summary = cleanSummary(doc.content_summary)
+            if (!summary) return null
+            return (
+              <span className="truncate italic">
+                {summary.length > 70 ? summary.slice(0, 70) + '…' : summary}
+              </span>
+            )
+          })()}
         </div>
 
         {/* Row 3: timestamps */}
