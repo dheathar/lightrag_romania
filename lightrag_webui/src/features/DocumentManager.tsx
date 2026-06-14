@@ -195,7 +195,7 @@ const pulseStyle = `
 .tooltip {
   position: fixed; /* Use fixed positioning to escape overflow constraints */
   z-index: 9999; /* Ensure tooltip appears above all other elements */
-  max-width: 600px;
+  max-width: 320px;
   white-space: normal;
   word-break: break-word;
   overflow-wrap: break-word;
@@ -727,9 +727,15 @@ export default function DocumentManager() {
 
         // Get container position
         const rect = container.getBoundingClientRect();
+        const tooltipWidth = 320;
+        const margin = 8;
 
-        // Position tooltip above the container
-        tooltip.style.left = `${rect.left}px`;
+        // Clamp left so tooltip never overflows right edge of viewport
+        const rawLeft = rect.left;
+        const maxLeft = window.innerWidth - tooltipWidth - margin;
+        const clampedLeft = Math.min(rawLeft, maxLeft);
+
+        tooltip.style.left = `${Math.max(margin, clampedLeft)}px`;
         tooltip.style.top = `${rect.top - 5}px`;
         tooltip.style.transform = 'translateY(-100%)';
       });
