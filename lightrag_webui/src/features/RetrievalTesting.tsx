@@ -9,7 +9,8 @@ import { useSettingsStore } from '@/stores/settings'
 import { useDebounce } from '@/hooks/useDebounce'
 import QuerySettings from '@/components/retrieval/QuerySettings'
 import { ChatMessage, MessageWithError } from '@/components/retrieval/ChatMessage'
-import { EraserIcon, SendIcon, CopyIcon, GitForkIcon, SlidersHorizontalIcon, SparklesIcon, PanelRightCloseIcon, PanelRightOpenIcon } from 'lucide-react'
+import { EraserIcon, SendIcon, CopyIcon, GitForkIcon, SlidersHorizontalIcon, SparklesIcon, PanelRightCloseIcon, PanelRightOpenIcon, DownloadIcon } from 'lucide-react'
+import { buildExportHtml, downloadHtml } from '@/lib/exportConversation'
 import { KnowledgeInsightsPanel } from '@/components/retrieval/KnowledgeInsightsPanel'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
@@ -147,6 +148,7 @@ export default function RetrievalTesting() {
   const [rightTab, setRightTab] = useState<'settings' | 'insights'>('settings')
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [activeMessageId, setActiveMessageId] = useState<string | null>(null)
+  const [exportTheme, setExportTheme] = useState<'light' | 'dark'>('light')
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null)
 
   // Smart switching logic: use Input for single line, Textarea for multi-line
@@ -981,6 +983,33 @@ export default function RetrievalTesting() {
             className="rounded-xl text-muted-foreground shrink-0"
           >
             {sidebarOpen ? <PanelRightCloseIcon className="size-4" /> : <PanelRightOpenIcon className="size-4" />}
+          </Button>
+          {/* Export conversation */}
+          <div className="flex items-center gap-0.5 shrink-0">
+            <button
+              type="button"
+              onClick={() => setExportTheme('light')}
+              className={`px-1.5 py-0.5 text-[10px] font-semibold rounded-l border border-r-0 transition-colors ${exportTheme === 'light' ? 'bg-primary text-primary-foreground border-primary' : 'text-muted-foreground border-border hover:text-foreground'}`}
+            >L</button>
+            <button
+              type="button"
+              onClick={() => setExportTheme('dark')}
+              className={`px-1.5 py-0.5 text-[10px] font-semibold rounded-r border transition-colors ${exportTheme === 'dark' ? 'bg-primary text-primary-foreground border-primary' : 'text-muted-foreground border-border hover:text-foreground'}`}
+            >D</button>
+          </div>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            side="top"
+            tooltip={`Export conversation (${exportTheme})`}
+            className="rounded-xl text-muted-foreground shrink-0"
+            onClick={() => {
+              const html = buildExportHtml(messages, exportTheme)
+              downloadHtml(html, `docforge-export-${exportTheme}.html`)
+            }}
+          >
+            <DownloadIcon className="size-4" />
           </Button>
           <Button
             type="button"
