@@ -92,11 +92,6 @@ COPY pyproject.toml .
 COPY setup.py .
 COPY uv.lock .
 
-# Replace full opencv-python with headless variant — eliminates libGL.so.1 dependency
-# Docling uses OpenCV only for image processing (no GUI/display needed in a server)
-RUN /app/.venv/bin/pip install --quiet --no-deps opencv-python-headless \
-    && /app/.venv/bin/pip uninstall --yes opencv-python 2>/dev/null || true
-
 # Ensure the installed scripts are on PATH
 ENV PATH=/app/.venv/bin:/root/.local/bin:$PATH
 
@@ -105,6 +100,12 @@ ENV PATH=/app/.venv/bin:/root/.local/bin:$PATH
 RUN --mount=type=cache,target=/root/.local/share/uv \
     uv sync --frozen --no-dev --extra api --extra offline --extra docling --no-editable \
     && /app/.venv/bin/python -m ensurepip --upgrade
+
+# Replace full opencv-python with headless variant AFTER uv sync (uv would reinstall it otherwise)
+# opencv-python requires libGL.so.1 (X11/Mesa); headless variant has identical image processing
+# but no display/GUI deps — correct for all server/Docker environments
+RUN /app/.venv/bin/pip install --quiet "opencv-python-headless" \
+    && /app/.venv/bin/pip uninstall --yes opencv-python 2>/dev/null || true
 
 # Create persistent data directories AFTER package installation
 RUN mkdir -p /app/data/rag_storage /app/data/inputs /app/data/tiktoken
