@@ -215,7 +215,7 @@ export const KnowledgeInsightsPanel = memo(({ insights, isGeneratingReasoning }:
       {/* KEYWORDS */}
       {hasKeywords && (
         <div>
-          <SectionLabel>KEYWORDS</SectionLabel>
+          <SectionLabel info={t('retrievePanel.insights.keywordsTooltip', 'Keywords are the main search terms the system derived from your question — high-level themes and specific terms it used to find relevant content in the documents.')}>KEYWORDS</SectionLabel>
           <div className="flex flex-wrap gap-1.5">
             {insights.keywords.high_level?.map((kw, idx) => (
               <span key={`high-${idx}`} className="text-[10px] px-2.5 py-1 rounded-full bg-primary/12 text-primary font-medium">
@@ -234,7 +234,7 @@ export const KnowledgeInsightsPanel = memo(({ insights, isGeneratingReasoning }:
       {/* SOURCES */}
       {insights.chunks && insights.chunks.length > 0 && (
         <div>
-          <SectionLabel>SOURCES</SectionLabel>
+          <SectionLabel info={t('retrievePanel.insights.sourcesTooltip', 'Sources are the actual document passages the answer was drawn from — the specific text retrieved from your reports to support the response.')}>SOURCES</SectionLabel>
           <div className="space-y-2">
             {insights.chunks.slice(0, 8).map((chunk, idx) => (
               <SourceCard key={`chunk-${idx}`} chunk={chunk} />
