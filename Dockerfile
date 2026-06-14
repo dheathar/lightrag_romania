@@ -68,12 +68,14 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Install native libs required by docling's C++ extensions (docling-parse, etc.)
-# libGL is NOT needed here — opencv is replaced with headless variant below
+# Install native libs required by docling's C++ extensions
+# libgl1 WITHOUT --no-install-recommends so apt pulls in libglx-mesa0 (the Mesa
+# implementation that actually provides libGL.so.1 — slim images skip it otherwise)
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
+    && apt-get install -y \
         libgomp1 \
         libglib2.0-0 \
+        libgl1 \
         libsm6 \
         libxext6 \
         libxrender1 \
@@ -101,11 +103,11 @@ RUN --mount=type=cache,target=/root/.local/share/uv \
     uv sync --frozen --no-dev --extra api --extra offline --extra docling --no-editable \
     && /app/.venv/bin/python -m ensurepip --upgrade
 
-# Replace full opencv-python with headless variant AFTER uv sync (uv would reinstall it otherwise)
-# opencv-python requires libGL.so.1 (X11/Mesa); headless variant has identical image processing
-# but no display/GUI deps — correct for all server/Docker environments
-RUN /app/.venv/bin/pip install --quiet "opencv-python-headless" \
-    && /app/.venv/bin/pip uninstall --yes opencv-python 2>/dev/null || true
+# Swap opencv-python → opencv-python-headless AFTER uv sync
+# Order matters: uninstall full first (so its cv2.so is removed), then install headless
+# This eliminates the libGL.so.1 dependency as a belt-and-suspenders measure
+RUN /app/.venv/bin/pip uninstall --yes opencv-python 2>/dev/null || true \
+    && /app/.venv/bin/pip install --quiet "opencv-python-headless"
 
 # Create persistent data directories AFTER package installation
 RUN mkdir -p /app/data/rag_storage /app/data/inputs /app/data/tiktoken
