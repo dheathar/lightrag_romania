@@ -88,6 +88,10 @@ interface SettingsState {
   setEnableKGInsights: (enable: boolean) => void
   enableKGReasoning: boolean
   setEnableKGReasoning: (enable: boolean) => void
+
+  // Sidebar
+  sidebarCollapsed: boolean
+  toggleSidebarCollapsed: () => void
 }
 
 const useSettingsStoreBase = create<SettingsState>()(
@@ -149,6 +153,10 @@ const useSettingsStoreBase = create<SettingsState>()(
 
       enableKGReasoning: false,
       setEnableKGReasoning: (enable: boolean) => set({ enableKGReasoning: enable }),
+
+      // Sidebar
+      sidebarCollapsed: false,
+      toggleSidebarCollapsed: () => set((state) => ({ sidebarCollapsed: !state.sidebarCollapsed })),
 
       setTheme: (theme: Theme) => set({ theme }),
 
@@ -250,7 +258,7 @@ const useSettingsStoreBase = create<SettingsState>()(
     {
       name: 'settings-storage',
       storage: createJSONStorage(() => localStorage),
-      version: 20,
+      version: 21,
       migrate: (state: any, version: number) => {
         if (version < 2) {
           state.showEdgeLabel = false
@@ -357,6 +365,9 @@ const useSettingsStoreBase = create<SettingsState>()(
           // Add Knowledge Graph Insights settings
           state.enableKGInsights = false
           state.enableKGReasoning = false
+        }
+        if (version < 21) {
+          state.sidebarCollapsed = false
         }
         return state
       }

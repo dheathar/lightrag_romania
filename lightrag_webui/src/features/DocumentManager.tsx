@@ -3,14 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { useSettingsStore } from '@/stores/settings'
 import Button from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from '@/components/ui/Table'
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/Card'
 import EmptyCard from '@/components/ui/EmptyCard'
 import Checkbox from '@/components/ui/Checkbox'
@@ -289,6 +281,129 @@ const pulseStyle = `
 // Type definitions for sort field and direction
 type SortField = 'created_at' | 'updated_at' | 'id' | 'file_path';
 type SortDirection = 'asc' | 'desc';
+
+// ── Relative time helper ────────────────────────────────────────────
+function formatRelTime(dateStr: string): string {
+  const diff = Date.now() - new Date(dateStr).getTime()
+  if (diff < 60_000) return 'just now'
+  if (diff < 3_600_000) return `${Math.floor(diff / 60_000)}m ago`
+  if (diff < 86_400_000) return `${Math.floor(diff / 3_600_000)}h ago`
+  if (diff < 2_592_000_000) return `${Math.floor(diff / 86_400_000)}d ago`
+  return new Date(dateStr).toLocaleDateString()
+}
+
+// ── DocumentRow card component ───────────────────────────────────────
+interface DocumentRowProps {
+  doc: DocStatusResponse & { status: DocStatus }
+  selected: boolean
+  onSelect: (checked: boolean) => void
+  showFileName: boolean
+  t: (key: string, fallback?: string) => string
+}
+
+function DocumentRow({ doc, selected, onSelect, showFileName, t }: DocumentRowProps) {
+  const fileName = doc.file_path
+    ? (doc.file_path.split(/[\\/]/).pop() || doc.id)
+    : doc.id
+  const shortId = doc.id.slice(0, 8) + '…'
+  const badge = getPipelineBadge(doc, t)
+  const tooltipText = formatPipelineTooltip(doc, t)
+
+  const statusEl = (() => {
+    switch (doc.status) {
+      case 'processed':    return <span className="text-xs font-medium text-green-600 dark:text-green-400">● processed</span>
+      case 'extracting':   return <span className="text-xs font-medium text-cyan-600 dark:text-cyan-400 animate-pulse">● extracting</span>
+      case 'preprocessed': return <span className="text-xs font-medium text-purple-600 dark:text-purple-400">● preprocessed</span>
+      case 'processing':   return <span className="text-xs font-medium text-blue-600 dark:text-blue-400 animate-pulse">● processing</span>
+      case 'pending':      return <span className="text-xs font-medium text-yellow-600 dark:text-yellow-400">● pending</span>
+      case 'failed':       return <span className="text-xs font-medium text-red-600 dark:text-red-400">● failed</span>
+      default:             return null
+    }
+  })()
+
+  return (
+    <div className="flex items-start gap-3 px-4 py-3 border-b border-border/40 hover:bg-accent/25 transition-colors group cursor-default">
+      {/* Checkbox */}
+      <div className="mt-0.5 flex-shrink-0">
+        <Checkbox
+          checked={selected}
+          onCheckedChange={(v) => onSelect(v === true)}
+          className="opacity-40 group-hover:opacity-100 data-[state=checked]:opacity-100 transition-opacity"
+        />
+      </div>
+
+      {/* Main content */}
+      <div className="flex-1 min-w-0">
+        {/* Row 1: name + status + pipeline */}
+        <div className="flex items-start justify-between gap-2">
+          <div className="min-w-0">
+            <span className="font-medium text-sm truncate block leading-snug">
+              {showFileName ? fileName : shortId}
+            </span>
+            {showFileName && (
+              <span className="text-[11px] text-muted-foreground font-mono">{shortId}</span>
+            )}
+          </div>
+          <div className="flex items-center gap-1.5 flex-shrink-0 mt-0.5">
+            {statusEl}
+            <div className="group/pip relative">
+              <Badge
+                variant="outline"
+                className={cn('text-[10px] px-1.5 py-0 font-medium whitespace-nowrap', badge.colorClass)}
+              >
+                {badge.label}
+              </Badge>
+              {tooltipText && (
+                <div className="invisible group-hover/pip:visible tooltip">
+                  <pre>{tooltipText}</pre>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Row 2: content stats + summary snippet */}
+        <div className="flex items-center gap-3 mt-0.5 text-xs text-muted-foreground">
+          {doc.content_length != null && (
+            <span>{doc.content_length.toLocaleString()} chars</span>
+          )}
+          {doc.chunks_count != null && (
+            <span>{doc.chunks_count} chunks</span>
+          )}
+          {doc.content_summary && (
+            <span className="truncate italic">
+              {doc.content_summary.length > 70
+                ? doc.content_summary.slice(0, 70) + '…'
+                : doc.content_summary}
+            </span>
+          )}
+        </div>
+
+        {/* Row 3: timestamps */}
+        <div className="flex items-center justify-between mt-0.5 text-[11px] text-muted-foreground/70">
+          <span>Created {formatRelTime(doc.created_at)}</span>
+          <span>Updated {formatRelTime(doc.updated_at)}</span>
+        </div>
+      </div>
+
+      {/* Error / metadata icon */}
+      {(doc.error_msg || (doc.metadata && Object.keys(doc.metadata).length > 0)) && (
+        <div className="mt-1 flex-shrink-0 group/meta relative tooltip-container">
+          {doc.error_msg
+            ? <AlertTriangle className="h-3.5 w-3.5 text-yellow-500" />
+            : <Info className="h-3.5 w-3.5 text-blue-400" />}
+          <div className="invisible group-hover/meta:visible tooltip">
+            {doc.track_id && <div className="mb-1">Track ID: {doc.track_id}</div>}
+            {doc.metadata && Object.keys(doc.metadata).length > 0 && (
+              <pre>{formatMetadata(doc.metadata)}</pre>
+            )}
+            {doc.error_msg && <pre>{doc.error_msg}</pre>}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
 
 export default function DocumentManager() {
   // Track component mount status
@@ -1429,187 +1544,60 @@ export default function DocumentManager() {
               </div>
             )}
             {docs && (
-              <div className="absolute inset-0 flex flex-col p-0">
-                <div className="absolute inset-[-1px] flex flex-col p-0 border rounded-md border-gray-200 dark:border-gray-700 overflow-hidden">
-                  <Table className="w-full">
-                    <TableHeader className="sticky top-0 bg-background z-10 shadow-sm">
-                      <TableRow className="border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/75 shadow-[inset_0_-1px_0_rgba(0,0,0,0.1)]">
-                        <TableHead
-                          onClick={() => handleSort('id')}
-                          className="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 select-none"
-                        >
-                          <div className="flex items-center">
-                            {showFileName
-                              ? t('documentPanel.documentManager.columns.fileName')
-                              : t('documentPanel.documentManager.columns.id')
-                            }
-                            {((sortField === 'id' && !showFileName) || (sortField === 'file_path' && showFileName)) && (
-                              <span className="ml-1">
-                                {sortDirection === 'asc' ? <ArrowUpIcon size={14} /> : <ArrowDownIcon size={14} />}
-                              </span>
-                            )}
-                          </div>
-                        </TableHead>
-                        <TableHead>{t('documentPanel.documentManager.columns.summary')}</TableHead>
-                        <TableHead>{t('documentPanel.documentManager.columns.status')}</TableHead>
-                        <TableHead>{t('documentPanel.documentManager.columns.pipeline')}</TableHead>
-                        <TableHead>{t('documentPanel.documentManager.columns.length')}</TableHead>
-                        <TableHead>{t('documentPanel.documentManager.columns.chunks')}</TableHead>
-                        <TableHead
-                          onClick={() => handleSort('created_at')}
-                          className="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 select-none"
-                        >
-                          <div className="flex items-center">
-                            {t('documentPanel.documentManager.columns.created')}
-                            {sortField === 'created_at' && (
-                              <span className="ml-1">
-                                {sortDirection === 'asc' ? <ArrowUpIcon size={14} /> : <ArrowDownIcon size={14} />}
-                              </span>
-                            )}
-                          </div>
-                        </TableHead>
-                        <TableHead
-                          onClick={() => handleSort('updated_at')}
-                          className="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 select-none"
-                        >
-                          <div className="flex items-center">
-                            {t('documentPanel.documentManager.columns.updated')}
-                            {sortField === 'updated_at' && (
-                              <span className="ml-1">
-                                {sortDirection === 'asc' ? <ArrowUpIcon size={14} /> : <ArrowDownIcon size={14} />}
-                              </span>
-                            )}
-                          </div>
-                        </TableHead>
-                        <TableHead className="w-16 text-center">
-                          {t('documentPanel.documentManager.columns.select')}
-                        </TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody className="text-sm overflow-auto">
-                      {filteredAndSortedDocs && filteredAndSortedDocs.map((doc) => (
-                        <TableRow key={doc.id}>
-                          <TableCell className="truncate font-mono overflow-visible max-w-[250px]">
-                            {showFileName ? (
-                              <>
-                                <div className="group relative overflow-visible tooltip-container">
-                                  <div className="truncate">
-                                    {getDisplayFileName(doc, 30)}
-                                  </div>
-                                  <div className="invisible group-hover:visible tooltip">
-                                    {doc.file_path}
-                                  </div>
-                                </div>
-                                <div className="text-xs text-gray-500">{doc.id}</div>
-                              </>
-                            ) : (
-                              <div className="group relative overflow-visible tooltip-container">
-                                <div className="truncate">
-                                  {doc.id}
-                                </div>
-                                <div className="invisible group-hover:visible tooltip">
-                                  {doc.file_path}
-                                </div>
-                              </div>
-                            )}
-                          </TableCell>
-                          <TableCell className="max-w-xs min-w-45 truncate overflow-visible">
-                            <div className="group relative overflow-visible tooltip-container">
-                              <div className="truncate">
-                                {doc.content_summary || '-'}
-                              </div>
-                              {doc.content_summary && (
-                                <div className="invisible group-hover:visible tooltip">
-                                  {doc.content_summary}
-                                </div>
-                              )}
-                            </div>
-                          </TableCell>
-                          <TableCell>
-                            <div className="group relative flex items-center overflow-visible tooltip-container">
-                              {doc.status === 'extracting' && (
-                                <span className="text-cyan-600 animate-pulse">{t('documentPanel.documentManager.status.extracting')}</span>
-                              )}
-                              {doc.status === 'processed' && (
-                                <span className="text-green-600">{t('documentPanel.documentManager.status.completed')}</span>
-                              )}
-                              {doc.status === 'preprocessed' && (
-                                <span className="text-purple-600">{t('documentPanel.documentManager.status.preprocessed')}</span>
-                              )}
-                              {doc.status === 'processing' && (
-                                <span className="text-blue-600">{t('documentPanel.documentManager.status.processing')}</span>
-                              )}
-                              {doc.status === 'pending' && (
-                                <span className="text-yellow-600">{t('documentPanel.documentManager.status.pending')}</span>
-                              )}
-                              {doc.status === 'failed' && (
-                                <span className="text-red-600">{t('documentPanel.documentManager.status.failed')}</span>
-                              )}
+              <div className="absolute inset-0 flex flex-col">
+                {/* Sort toolbar */}
+                <div className="flex items-center gap-1 px-4 py-1.5 border-b border-border/50 text-xs text-muted-foreground flex-shrink-0">
+                  <span className="mr-1 font-medium">Sort:</span>
+                  <button
+                    onClick={() => handleSort('id')}
+                    className={cn(
+                      'flex items-center gap-0.5 px-2 py-0.5 rounded hover:bg-accent transition-colors',
+                      (sortField === 'id' || sortField === 'file_path') && 'text-primary font-semibold'
+                    )}
+                  >
+                    {showFileName ? t('documentPanel.documentManager.columns.fileName') : t('documentPanel.documentManager.columns.id')}
+                    {(sortField === 'id' || sortField === 'file_path') && (
+                      sortDirection === 'asc' ? <ArrowUpIcon size={11} /> : <ArrowDownIcon size={11} />
+                    )}
+                  </button>
+                  <button
+                    onClick={() => handleSort('created_at')}
+                    className={cn(
+                      'flex items-center gap-0.5 px-2 py-0.5 rounded hover:bg-accent transition-colors',
+                      sortField === 'created_at' && 'text-primary font-semibold'
+                    )}
+                  >
+                    {t('documentPanel.documentManager.columns.created')}
+                    {sortField === 'created_at' && (
+                      sortDirection === 'asc' ? <ArrowUpIcon size={11} /> : <ArrowDownIcon size={11} />
+                    )}
+                  </button>
+                  <button
+                    onClick={() => handleSort('updated_at')}
+                    className={cn(
+                      'flex items-center gap-0.5 px-2 py-0.5 rounded hover:bg-accent transition-colors',
+                      sortField === 'updated_at' && 'text-primary font-semibold'
+                    )}
+                  >
+                    {t('documentPanel.documentManager.columns.updated')}
+                    {sortField === 'updated_at' && (
+                      sortDirection === 'asc' ? <ArrowUpIcon size={11} /> : <ArrowDownIcon size={11} />
+                    )}
+                  </button>
+                </div>
 
-                              {/* Icon rendering logic */}
-                              {doc.error_msg ? (
-                                <AlertTriangle className="ml-2 h-4 w-4 text-yellow-500" />
-                              ) : (doc.metadata && Object.keys(doc.metadata).length > 0) && (
-                                <Info className="ml-2 h-4 w-4 text-blue-500" />
-                              )}
-
-                              {/* Tooltip rendering logic */}
-                              {(doc.error_msg || (doc.metadata && Object.keys(doc.metadata).length > 0) || doc.track_id) && (
-                                <div className="invisible group-hover:visible tooltip">
-                                  {doc.track_id && (
-                                    <div className="mt-1">Track ID: {doc.track_id}</div>
-                                  )}
-                                  {doc.metadata && Object.keys(doc.metadata).length > 0 && (
-                                    <pre>{formatMetadata(doc.metadata)}</pre>
-                                  )}
-                                  {doc.error_msg && (
-                                    <pre>{doc.error_msg}</pre>
-                                  )}
-                                </div>
-                              )}
-                            </div>
-                          </TableCell>
-                          <TableCell className="overflow-visible">
-                            {(() => {
-                              const badge = getPipelineBadge(doc, t);
-                              const tooltipText = formatPipelineTooltip(doc, t);
-                              return (
-                                <div className="group relative overflow-visible tooltip-container">
-                                  <Badge
-                                    variant="outline"
-                                    className={cn('text-[10px] px-1.5 py-0 font-medium whitespace-nowrap', badge.colorClass)}
-                                  >
-                                    {badge.label}
-                                  </Badge>
-                                  {tooltipText && (
-                                    <div className="invisible group-hover:visible tooltip">
-                                      <pre>{tooltipText}</pre>
-                                    </div>
-                                  )}
-                                </div>
-                              );
-                            })()}
-                          </TableCell>
-                          <TableCell>{doc.content_length ?? '-'}</TableCell>
-                          <TableCell>{doc.chunks_count ?? '-'}</TableCell>
-                          <TableCell className="truncate">
-                            {new Date(doc.created_at).toLocaleString()}
-                          </TableCell>
-                          <TableCell className="truncate">
-                            {new Date(doc.updated_at).toLocaleString()}
-                          </TableCell>
-                          <TableCell className="text-center">
-                            <Checkbox
-                              checked={selectedDocIds.includes(doc.id)}
-                              onCheckedChange={(checked) => handleDocumentSelect(doc.id, checked === true)}
-                              // disabled={doc.status !== 'processed'}
-                              className="mx-auto"
-                            />
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
+                {/* Card rows */}
+                <div className="flex-1 overflow-y-auto">
+                  {filteredAndSortedDocs && filteredAndSortedDocs.map((doc) => (
+                    <DocumentRow
+                      key={doc.id}
+                      doc={doc}
+                      selected={selectedDocIds.includes(doc.id)}
+                      onSelect={(checked) => handleDocumentSelect(doc.id, checked)}
+                      showFileName={showFileName}
+                      t={t}
+                    />
+                  ))}
                 </div>
               </div>
             )}
