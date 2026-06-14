@@ -333,7 +333,8 @@ export default function RetrievalTesting() {
               isError: isError,
               mermaidRendered: assistantMessage.mermaidRendered,
               latexRendered: assistantMessage.latexRendered,
-              thinkingTime: assistantMessage.thinkingTime
+              thinkingTime: assistantMessage.thinkingTime,
+              references: assistantMessage.references
             })
           }
           return newMessages
@@ -403,11 +404,11 @@ export default function RetrievalTesting() {
           }
         } else {
           const response = await queryText(queryParams)
-          updateAssistantMessage(response.response)
-          // Add references/citations to the assistant message
+          // Set references first so updateAssistantMessage propagates them to state
           if (response.references && response.references.length > 0) {
             assistantMessage.references = response.references
           }
+          updateAssistantMessage(response.response)
         }
 
         // Fetch Knowledge Graph insights if enabled
